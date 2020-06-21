@@ -1,3 +1,6 @@
+[v-cloak]{
+    display: none;
+}
 .container{
     width: 420px;
     height: 320px;
@@ -11,6 +14,46 @@
     margin: auto;
     padding: 20px;
     z-index: 130;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 3px 18px rgba(100, 0, 0, 0.5);
+    font-size: 16px;
+}
+
+.container1{
+
+    width: 420px;
+    height: 500px;
+    min-height: 500px;
+    max-height: 500px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    padding: 20px;
+    z-index: 120;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 3px 18px rgba(100, 0, 0, 0.5);
+    font-size: 16px;
+}
+
+.container2{
+
+    width: 420px;
+    height: 500px;
+    min-height: 500px;
+    max-height: 500px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    padding: 20px;
+    z-index: 110;
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 3px 18px rgba(100, 0, 0, 0.5);
@@ -53,11 +96,16 @@
     text-decoration: none;
     margin-left: 100px;
 }
+.font-set1{
+    font-size: 13px;
+    text-decoration: none;
+    margin-left: 200px;
+}
 a:hover{
     text-decoration: underline;
 }
 .layui-form-item h1{
-    font-size: 2.5em;
+    font-size: 2.2em;
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -70,4 +118,9 @@ a:hover{
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+.layui-form-item h5{
+    margin-left:110px;
+    color: #FF5722;
+    margin-top: -5px;
 }
