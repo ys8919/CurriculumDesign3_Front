@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,9 +10,8 @@
     <script src="js/vue.min.js"></script>
     <script src="layui/layui.all.js"></script>
 
-    <style>
 
-    </style>
+
 </head>
 <body bgcolor="#c2c2c2" >
 <div  id="login">
@@ -63,19 +62,19 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">用户名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="username1" required  lay-verify="required" placeholder="请输入用户名" v-model="registerUsername"  autocomplete="off" class="layui-input">
+                    <input type="text" name="username1" required  lay-verify="required|username" placeholder="请输入用户名" v-model="registerUsername"  autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">密&nbsp;&nbsp;码</label>
                 <div class="layui-input-inline">
-                    <input type="password" name="passwd" required lay-verify="required" placeholder="请输入密码" v-model="registerPassword1"  autocomplete="off" class="layui-input">
+                    <input type="password" name="registerPasswd" required lay-verify="required|pass" placeholder="请输入密码" v-model="registerPassword1"  autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">确认密码</label>
                 <div class="layui-input-inline">
-                    <input type="password" name="passwd1" required lay-verify="required" placeholder="请再次输入密码" v-model="registerPassword2"  autocomplete="off" class="layui-input">
+                    <input type="password" name="registerPasswd1" required lay-verify="required|confirmPass" placeholder="请再次输入密码" v-model="registerPassword2"  autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -134,13 +133,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">密&nbsp;&nbsp;码</label>
                 <div class="layui-input-inline">
-                    <input type="password" name="passwd" required lay-verify="required" placeholder="请输入新密码" v-model="pwdPassword1"  autocomplete="off" class="layui-input">
+                    <input type="password" name="pwdPasswd" required lay-verify="required|pass" placeholder="请输入新密码" v-model="pwdPassword1"  autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">确认密码</label>
                 <div class="layui-input-inline">
-                    <input type="password" name="passwd1" required lay-verify="required" placeholder="请再次输入密码" v-model="pwdPassword2"  autocomplete="off" class="layui-input">
+                    <input type="password" name="pwdPasswd1" required lay-verify="required|confirmPass1" placeholder="请再次输入密码" v-model="pwdPassword2"  autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="  layui-form-item">
@@ -155,9 +154,9 @@
 
         </form>
     </div>
-</div>
 
-<script type="module" src="js/login.js"></script>
+</div>
+<script type="module" src="views/login.js"></script>
 
 </body>
 </html>
