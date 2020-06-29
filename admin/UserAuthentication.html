@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/index.css" >
+    <script src="../js/axios.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <script src="../layui/layui.all.js"></script>
+</head>
+<body class="layui-layout-body">
+<div id="UserAuthentication">
+    <div class="containerAuthenticationUpdate layui-anim layui-anim-scale"  v-cloak>
+        <form class="layui-form" @submit.prevent="UserAuthenticationUpdate">
+
+            <div class="layui-form-item">
+                <h1 class="layui-text ">认证信息</h1>
+            </div>
+
+            <div class="layui-form-item layui-form-item-rz" v-cloak style="margin-top: 100px;">
+                <label class="layui-form-label">账 &nbsp;&nbsp;号</label>
+                <div class="layui-input-block layui-icon ">
+
+                    <input type="text" name="userId" required disabled  lay-verify="required" v-model="userId"  autocomplete="off" class="layui-input layui-disabled">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-rz">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block layui-icon ">
+                    <input type="text" name="username" required disabled lay-verify="required" v-model="userName"  autocomplete="off" class="layui-input layui-disabled">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-rz">
+                <label class="layui-form-label">认证状态</label>
+                <div class="layui-input-block layui-icon ">
+                    <input type="text" name="username" required disabled lay-verify="required" v-model="userStateInfo"  autocomplete="off" class="layui-input layui-disabled">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-rz">
+                <label class="layui-form-label">真名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="registerPasswd" required lay-verify="required" placeholder="请输入真名" v-model="userRealName"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-rz">
+                <label class="layui-form-label">学校</label>
+                <div class="layui-input-block">
+                    <input type="text" name="registerPasswd" required lay-verify="required" placeholder="请输入学校" v-model="userSchoolName"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-rz">
+                <label class="layui-form-label">学号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="registerPasswd1" required lay-verify="required" placeholder="请输入学号" v-model="userStuNumber"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-rz">
+                <label class="layui-form-label">学历</label>
+                <div class="layui-input-block">
+                    <input type="text" name="registerPasswd1" required lay-verify="required" placeholder="请输入学历" v-model="userEducation"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="  layui-form-item layui-form-item-info">
+                <h5 class="layui-text " v-text="loginMsg"></h5>
+            </div>
+            <div class="layui-form-item layui-form-item-info">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-anim layui-anim-scale layui-btn-user"  lay-submit lay-filter="formDemo" >修改</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+<script  type="module"src="../views/admin/UserAuthentication.js"></script>
+
+</body>
+</html>

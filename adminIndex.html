@@ -28,18 +28,19 @@
                 </dl>
             </li>
         </ul>
-        <ul class="layui-nav layui-layout-right" v-cloak>
+        <ul class="layui-nav layui-layout-right" v-cloak  lay-filter="filter1">
             <li class="layui-nav-item">
                 <a href="javascript:;" >
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img" >
                     {{userName}}
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
+                    <dd><a  href="admin/userInfo.html" onclick="return false;">基本资料</a></dd>
+                    <dd><a href="admin/UserAuthentication.html" onclick="return false;" >认证信息</a></dd>
+                    <dd><a href="admin/registerUpdate.html" onclick="return false;" >修改密码</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="javascript:; " @click="Logout">退出</a></li>
+            <li class="layui-nav-item"><a href="javascript:;" @click="Logout">退出</a></li>
         </ul>
     </div>
 
@@ -50,7 +51,7 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">用户信息</a></dd>
+                        <dd><a href="admin/userList.html" onclick="return false;">用户信息</a></dd>
                         <dd><a href="javascript:;">用户认证</a></dd>
                         <dd><a href="javascript:;">发布者管理</a></dd>
                     </dl>
@@ -71,13 +72,12 @@
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <!--<iframe  frameborder="0" id="iframeMain" src="" style="width: 100%;height: 99%;"></iframe>-->
-        <div class="layui-input-block layui-icon layui-search">
+        <iframe  frameborder="0" id="iframeMain" src="admin/userList.html" style="width: 100%;height: 99%;"></iframe>
+        <!--<div class="layui-input-block layui-icon layui-search">
             <input type="text" name="" required  lay-verify="required" placeholder="" v-model="query"  autocomplete="off" class="layui-input-search">
             <button type="button" class="layui-btn-search layui-btn layui-btn-sm layui-btn-primary ">
                 <i class="layui-icon layui-icon-search"></i>
             </button>
-
         </div>
         <div style="margin-top: 50px">
             <table id="demo" lay-filter="test"></table>
@@ -86,7 +86,7 @@
                 <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
             </script>
-        </div>
+        </div>-->
     </div>
 
     <div class="layui-footer">

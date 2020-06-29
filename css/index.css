@@ -1,70 +1,9 @@
-[v-cloak]{
-    display: none;
-}
-.container{
-    width: 420px;
-    height: 320px;
-    min-height: 320px;
-    max-height: 320px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    padding: 20px;
-    z-index: 130;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 3px 18px rgba(100, 0, 0, 0.5);
-    font-size: 16px;
-}
-
-.container1{
-
-    width: 420px;
-    height: 500px;
-    min-height: 500px;
-    max-height: 500px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    padding: 20px;
-    z-index: 120;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 3px 18px rgba(100, 0, 0, 0.5);
-    font-size: 16px;
-}
-
-.container2{
-
-    width: 420px;
-    height: 500px;
-    min-height: 500px;
-    max-height: 500px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    padding: 20px;
-    z-index: 110;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 3px 18px rgba(100, 0, 0, 0.5);
-    font-size: 16px;
-}
 
 .containerUser{
-    width: 420px;
-    height: 320px;
-    min-height: 320px;
-    max-height: 320px;
+    width: 620px;
+    height: 620px;
+    min-height: 620px;
+    max-height: 620px;
     position: absolute;
     top: 0;
     left: 0;
@@ -78,15 +17,42 @@
     box-shadow: 0 3px 18px rgba(100, 0, 0, 0.5);
     font-size: 16px;
 }
-
-.close{
-    background-color: white;
-    border: none;
-    font-size: 18px;
-    margin-left: 410px;
-    margin-top: -10px;
+.containerRegister{
+    width: 620px;
+    height: 720px;
+    min-height: 720px;
+    max-height: 720px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    padding: 20px;
+    z-index: 130;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 3px 18px rgba(100, 0, 0, 0.5);
+    font-size: 16px;
 }
-
+.containerAuthenticationUpdate{
+    width: 620px;
+    height: 720px;
+    min-height: 720px;
+    max-height: 720px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    padding: 20px;
+    z-index: 130;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 3px 18px rgba(100, 0, 0, 0.5);
+    font-size: 16px;
+}
 .layui-input{
     border-radius: 5px;
     width: 300px;
@@ -106,22 +72,6 @@
     font-size: 15px;
     margin-left: -20px;
 }
-
-.layui-form-item{
-    margin-left: -20px;
-}
-#logoid{
-    margin-top: -16px;
-    padding-left:150px;
-    padding-bottom: 15px;
-}
-.layui-btn{
-    margin-left: -50px;
-    border-radius: 5px;
-    width: 350px;
-    height: 40px;
-    font-size: 15px;
-}
 .layui-btn-search{
     margin-top: -5px;
     margin-left: 0px;
@@ -131,6 +81,13 @@
     font-size: 15px;
 }
 
+.layui-btn-user{
+    margin-left: -50px;
+    border-radius: 5px;
+    width: 350px;
+    height: 40px;
+    font-size: 15px;
+}
 .verity{
     width: 120px;
 }
@@ -166,4 +123,12 @@ a:hover{
     margin-left:110px;
     color: #FF5722;
     margin-top: -5px;
+}
+.layui-form-item-info{
+    margin-top: 50px;
+    margin-left: 90px;
+}
+.layui-form-item-rz{
+    margin-top: 30px;
+    margin-left: 90px;
 }

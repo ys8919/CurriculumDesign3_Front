@@ -7,7 +7,7 @@ var vmLogin = new Vue({
         registerShow:false,
         passwordShow:false,
         userId:'1001',
-        password:'1234',
+        password:'123456',
         registerUsername: '',
         registerPassword1: '',
         registerPassword2: '',
@@ -53,6 +53,7 @@ var vmLogin = new Vue({
                          */
                         if (response.data.flag === true) {
                             sessionStorage.token = response.data.token    //将返回的token储存在sessionStorage里面
+                            sessionStorage.setItem('userId', response.data.userId)
                             sessionStorage.setItem('userName', response.data.userName)
                             sessionStorage.setItem('jurisdiction', response.data.jurisdiction)
                         }

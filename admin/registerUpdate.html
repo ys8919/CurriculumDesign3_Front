@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/index.css" >
+    <script src="../js/axios.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <script src="../layui/layui.all.js"></script>
+</head>
+<body class="layui-layout-body">
+<div id="registerUpdate">
+    <div class="containerRegister layui-anim layui-anim-scale"  v-cloak>
+        <form class="layui-form" @submit.prevent="registerUpdate">
+
+            <div class="layui-form-item">
+                <h1 class="layui-text ">修改密码</h1>
+            </div>
+
+            <div class="layui-form-item layui-form-item-info" v-cloak style="margin-top: 100px;">
+                <label class="layui-form-label">账 &nbsp;&nbsp;号</label>
+                <div class="layui-input-block layui-icon ">
+
+                    <input type="text" name="userId" required disabled  lay-verify="required" v-model="userId"  autocomplete="off" class="layui-input layui-disabled">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-info">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block layui-icon ">
+                    <input type="text" name="username" required disabled lay-verify="required" v-model="userName"  autocomplete="off" class="layui-input layui-disabled">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-info">
+                <label class="layui-form-label">旧密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="registerPasswd" required lay-verify="required|pass" placeholder="请输入旧密码" v-model="userPasswd"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-info">
+                <label class="layui-form-label">新密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="registerPasswd" required lay-verify="required|pass" placeholder="请输入新密码" v-model="userNewPasswd"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-info">
+                <label class="layui-form-label">确认密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="registerPasswd1" required lay-verify="required|confirmPass" placeholder="请再次输入密码" v-model="userNewPasswd1"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="  layui-form-item layui-form-item-info">
+                <h5 class="layui-text " v-text="loginMsg"></h5>
+            </div>
+            <div class="layui-form-item layui-form-item-info">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-anim layui-anim-scale layui-btn-user"  lay-submit lay-filter="formDemo" >修改</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+<script  type="module"src="../views/admin/registerUpdate.js"></script>
+
+</body>
+</html>
