@@ -45,7 +45,7 @@ var vmuserList = new Vue({
                     page:1
                 }, {
                     headers: {
-                        TOKEN:sessionStorage.getItem('token') ||'',
+                        token:sessionStorage.getItem('token') ||'',
                         //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
                     },
                     'Content-Type':'application/json'
@@ -80,7 +80,7 @@ var vmuserList = new Vue({
                         tel:this.userTel,
                     }, {
                         headers: {
-                            TOKEN:sessionStorage.getItem('token') ||'',
+                            token:sessionStorage.getItem('token') ||'',
                             //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
                         },
                         'Content-Type':'application/json'  //如果写成contentType会报错

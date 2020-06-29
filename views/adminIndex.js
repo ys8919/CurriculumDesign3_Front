@@ -46,14 +46,14 @@ var vmAdminIndex = new Vue({
                 {
                 }, {
                     headers: {
-                        TOKEN:sessionStorage.getItem('token') ||'',
+                        token:sessionStorage.getItem('token') ||'',
                         //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
                     },
                     'Content-Type':'application/json'
                 });
-
-            window.location.href='login.html';
             sessionStorage.clear()
+            window.location.href='login.html';
+
         }
 
 

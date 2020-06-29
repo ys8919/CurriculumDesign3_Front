@@ -51,19 +51,21 @@ var vmLogin = new Vue({
                         });
 
                          */
-                        if (response.data.flag === true) {
+                        if (response.data.flag ) {
                             sessionStorage.token = response.data.token    //将返回的token储存在sessionStorage里面
                             sessionStorage.setItem('userId', response.data.userId)
                             sessionStorage.setItem('userName', response.data.userName)
                             sessionStorage.setItem('jurisdiction', response.data.jurisdiction)
-                        }
-                        console.log(response.data);
-                        console.log(sessionStorage.getItem('token'));
-                        if(response.data.jurisdiction===3){
-                            window.location.href='adminIndex.html';
+                            if(response.data.jurisdiction===3){
+                                window.location.href='adminIndex.html';
+                            }else{
+                                window.location.href='index.html';
+                            }
                         }else{
-                            window.location.href='index.html';
+                            that.loginMsg="用户名或密码错误"
                         }
+
+
                     })
                 .catch(error => {
                     layer.close(loading);

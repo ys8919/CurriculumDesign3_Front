@@ -20,7 +20,7 @@ var vmindex = new Vue({
                         passwd:this.password,
                     }, {
                         headers: {
-                            TOKEN:sessionStorage.getItem('token') ||'',
+                            token:sessionStorage.getItem('token') ||'',
                             //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
                         },
                         'Content-Type':'application/json'  //如果写成contentType会报错

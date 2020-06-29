@@ -12,11 +12,11 @@ var vmuserList = new Vue({
 
     },
     created(){
-        //×Ô¶¯¼ÓÔØindexs·½·¨
+        //è‡ªåŠ¨åŠ è½½indexsæ–¹æ³•
         //this.userInfo();
     },mounted(){
-        //×Ô¶¯¼ÓÔØindexs·½·¨
-        //this.VerifyLogin();//µÇÂ¼ÑéÖ¤
+        //è‡ªåŠ¨åŠ è½½indexsæ–¹æ³•
+        //this.VerifyLogin();//ç™»å½•éªŒè¯
         this.userInfo();
     },
     methods: {
@@ -32,83 +32,81 @@ var vmuserList = new Vue({
                     time: 60*1000
                 });
                 //console.log(user)
-                axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/.action',
+                axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/modifyUserPassword.action',
                     {
                         userId:this.userId,
                         passwd:this.userPasswd,
                         newPasswd:this.userNewPasswd,
                     }, {
                         headers: {
-                            TOKEN:sessionStorage.getItem('token') ||'',
+                            token:sessionStorage.getItem('token') ||'',
                             //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
                         },
-                        'Content-Type':'application/json'  //Èç¹ûĞ´³ÉcontentType»á±¨´í
+                        'Content-Type':'application/json'  //å¦‚æœå†™æˆcontentTypeä¼šæŠ¥é”™
                     })
                     .then(response => {
                         layer.close(loading);
                         layer.open({
-                            title: 'ÌáÊ¾',
+                            title: 'æç¤º',
                             content: response.data.msg,
-                            /* yes: function(index, layero) {
-                                 that.userId=response.data.userId
-                                 that.password=''
-                                 that.passwordReturn()
-                                 layer.close(index);
-                             },*/
+                            yes: function(index, layero) {
+                                if(response.data.flag){
+                                    sessionStorage.clear()
+                                    window.location.href='../login.html';
+                                }else{
+
+                                }
+                            },
                         });
                         console.log(response.data);
                     })
                     .catch(error => {
                         layer.close(loading);
                         layer.open({
-                            title: 'Ê§°Ü',
-                            content:'·şÎñÆ÷ÇëÇóÊ§°Ü'
+                            title: 'å¤±è´¥',
+                            content:'æœåŠ¡å™¨è¯·æ±‚å¤±è´¥'
                         });
                     });
             }
         },
-       
+
 
 
     }
 
 });
 /**
- *±íµ¥ÈÏÖ¤
+ *è¡¨å•è®¤è¯
  */
 var $ = layui.$;
 layui.use('form', function(){
     var form = layui.form;
     form.verify({
-        username: function(value, item){ //value£º±íµ¥µÄÖµ¡¢item£º±íµ¥µÄDOM¶ÔÏó
-            if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s¡¤]+$").test(value)){
-                return 'ÓÃ»§Ãû²»ÄÜÓĞÌØÊâ×Ö·û';
+        username: function(value, item){ //valueï¼šè¡¨å•çš„å€¼ã€itemï¼šè¡¨å•çš„DOMå¯¹è±¡
+            if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\sÂ·]+$").test(value)){
+                return 'ç”¨æˆ·åä¸èƒ½æœ‰ç‰¹æ®Šå­—ç¬¦';
             }
             if(/(^\_)|(\__)|(\_+$)/.test(value)){
-                return 'ÓÃ»§ÃûÊ×Î²²»ÄÜ³öÏÖÏÂ»®Ïß\'_\'';
+                return 'ç”¨æˆ·åé¦–å°¾ä¸èƒ½å‡ºç°ä¸‹åˆ’çº¿\'_\'';
             }
             if(/^\d+\d+\d$/.test(value)){
-                return 'ÓÃ»§Ãû²»ÄÜÈ«ÎªÊı×Ö';
+                return 'ç”¨æˆ·åä¸èƒ½å…¨ä¸ºæ•°å­—';
             }
         }
 
-        //ÎÒÃÇ¼ÈÖ§³ÖÉÏÊöº¯ÊıÊ½µÄ·½Ê½£¬Ò²Ö§³ÖÏÂÊöÊı×éµÄĞÎÊ½
-        //Êı×éµÄÁ½¸öÖµ·Ö±ğ´ú±í£º[ÕıÔòÆ¥Åä¡¢Æ¥Åä²»·ûÊ±µÄÌáÊ¾ÎÄ×Ö]
+        //æˆ‘ä»¬æ—¢æ”¯æŒä¸Šè¿°å‡½æ•°å¼çš„æ–¹å¼ï¼Œä¹Ÿæ”¯æŒä¸‹è¿°æ•°ç»„çš„å½¢å¼
+        //æ•°ç»„çš„ä¸¤ä¸ªå€¼åˆ†åˆ«ä»£è¡¨ï¼š[æ­£åˆ™åŒ¹é…ã€åŒ¹é…ä¸ç¬¦æ—¶çš„æç¤ºæ–‡å­—]
         ,pass: [
             /^[\S]{6,12}$/
-            ,'ÃÜÂë±ØĞë6µ½12Î»£¬ÇÒ²»ÄÜ³öÏÖ¿Õ¸ñ'
+            ,'å¯†ç å¿…é¡»6åˆ°12ä½ï¼Œä¸”ä¸èƒ½å‡ºç°ç©ºæ ¼'
         ]
 
         ,confirmPass:function(value, item){
-            if($('input[name=registerPasswd]').val() !== value){
-                return 'Á½´ÎÊäÈëµÄÃÜÂë²»Ò»ÖÂ'
+            if($('input[name=userNewPasswd]').val() !== value){
+                return 'ä¸¤æ¬¡è¾“å…¥çš„å¯†ç ä¸ä¸€è‡´'
             }
         },
-        confirmPass1:function(value, item){
-            if($('input[name=pwdPasswd]').val() !== value){
-                return 'Á½´ÎÊäÈëµÄÃÜÂë²»Ò»ÖÂ'
-            }
-        },
+
     });
 });
 
