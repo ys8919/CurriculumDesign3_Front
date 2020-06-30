@@ -14,9 +14,11 @@ var vmuserList = new Vue({
         //自动加载indexs方法
         //this.userInfo();
     },mounted(){
-        //自动加载indexs方法
-        //this.VerifyLogin();//登录验证
-        this.userInfo();
+        this.$nextTick(function () {
+            //自动加载indexs方法
+            //this.VerifyLogin();//登录验证
+            this.userInfo();
+        })
     },
     methods: {
         userInfo:function () {

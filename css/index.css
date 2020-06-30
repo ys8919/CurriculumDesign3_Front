@@ -1,6 +1,6 @@
 
 .containerUser{
-    width: 620px;
+    width: 720px;
     height: 620px;
     min-height: 620px;
     max-height: 620px;
@@ -18,7 +18,7 @@
     font-size: 16px;
 }
 .containerRegister{
-    width: 620px;
+    width: 720px;
     height: 720px;
     min-height: 720px;
     max-height: 720px;
@@ -36,7 +36,7 @@
     font-size: 16px;
 }
 .containerAuthenticationUpdate{
-    width: 620px;
+    width: 720px;
     height: 720px;
     min-height: 720px;
     max-height: 720px;
@@ -126,9 +126,9 @@ a:hover{
 }
 .layui-form-item-info{
     margin-top: 50px;
-    margin-left: 90px;
+    margin-left: 100px;
 }
 .layui-form-item-rz{
     margin-top: 30px;
-    margin-left: 90px;
+    margin-left: 100px;
 }

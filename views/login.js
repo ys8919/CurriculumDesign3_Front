@@ -132,7 +132,7 @@ var vmLogin = new Vue({
                     time: 60*1000
                 });
                 //console.log(user)
-                axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/.action',
+                axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/forgetPassword.action',
                     {
                         userId:this.pwdUserId,
                         passwd:this.pwdPassword1,

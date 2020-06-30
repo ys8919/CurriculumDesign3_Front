@@ -39,7 +39,7 @@ var vmuserList = new Vue({
                     page:1
                 }, {
                     headers: {
-                        TOKEN:sessionStorage.getItem('token') ||'',
+                        token:sessionStorage.getItem('token') ||'',
                         //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
                     },
                     'Content-Type':'application/json'
@@ -51,32 +51,16 @@ var vmuserList = new Vue({
                     that.userRealName=response.data.data[0].realName
                     that.userEducation=response.data.data[0].education
                     that.userState=response.data.data[0].state
-                    switch (response.data.data[0].state) {
-                        case 1:
-                            that.userStateInfo='未认证'
-                            break;
-                        case 2:
-                            that.userStateInfo='认证待审核'
-                            break;
-                        case 3:
-                            that.userStateInfo='已审核'
-                            break;
-                        case 999:
-                            that.userStateInfo='未通过认证'
-                            break;
-                    }
 
-                    console.log(response.data.data[0].state)
-
-
+                    that.userStateInfo=that.authenticationInfo(response.data.data[0].state);//返回认证信息
                 })
-                .catch(error => {
+               /* .catch(error => {
                     layer.close(loading);
                     layer.open({
                         title: '失败',
                         content:'服务器请求失败'
                     });
-                });
+                });*/
         },
         UserAuthenticationUpdate:function(){
             let loading

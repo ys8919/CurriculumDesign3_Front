@@ -49,10 +49,10 @@ var vmuserList = new Vue({
                         layer.open({
                             title: '提示',
                             content: response.data.msg,
-                            yes: function(index, layero) {
+                            yes:function(index, layero) {
                                 if(response.data.flag){
                                     sessionStorage.clear()
-                                    window.location.href='../login.html';
+                                    top.location.href='../login.html';
                                 }else{
 
                                 }

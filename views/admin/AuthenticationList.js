@@ -1,7 +1,7 @@
 import apiUrl from '../Global.js'
 Vue.use(apiUrl);
 var vmuserList = new Vue({
-    el: '#userList',
+    el: '#AuthenticationList',
     data:{
         userName:'',
         query:'',
@@ -37,44 +37,23 @@ var vmuserList = new Vue({
                             {type: 'checkbox', fixed: 'left',align:'center'}
                             ,{field: 'userId', title: 'ID', width:120, sort: true, fixed: 'left',align:'center'}
                             ,{field: 'userName', title: '用户名', width:120,align:'center'}
-                            ,{field: 'email', title: '邮箱', width:100,align:'center'}
-                            ,{field: 'tel', title: '手机', width:100,align:'center'}
+
                             ,{field: 'schoolName', title: '学校', width: 100,align:'center'}
                             ,{field: 'stuNumber', title: '学号', width: 100,sort: true,align:'center'}
                             ,{field: 'realName', title: '真名', width: 100,align:'center', }
                             ,{field: 'education', title: '学历', width: 80,align:'center'}
-                            ,{field: 'jurisdiction', title: '权限', width: 120,align:'center', sort: true,
-                                templet: function(d){
-                                    //将数字转成字符模式显示
-                                    return  that.jurisdictionInfo(d.jurisdiction)
-                                }}
+
                             ,{field: 'state', title: '状态', width: 120,align:'center', sort: true,
                                 templet: function(d){
                                     //将数字转成字符模式显示
                                     return  that.authenticationInfo(d.state)
                                 }}
-                            ,{fixed: 'right', width: 170, align:'center', toolbar: '#barDemo'}
+                            ,{fixed: 'right', width: 70, align:'center', toolbar: '#barDemo'}
                         ]],
                         done: function(res, curr, count){
 
                             that.BackgroundLogin(res);  //后台是否登录回调
                         }
-                        /*,cols: [[ //表头
-
-
-                            ,{field: 'competitionId', title: 'ID', width:150, sort: true}
-                            ,{field: 'competitionName', title: '竞赛标题', width:150}
-                            ,{field: 'chargePersonId', title: '负责人', width:80,}
-                            ,{field: 'competitionInfo', title: '竞赛信息', width:200}
-                            ,{field: 'releaseTime', title: '生成时间', width: 150}
-                            ,{field: 'CompetitionTime', title: '比赛时间', width: 150,sort: true}
-                            ,{field: 'RegistrationTimeStart', title: '报名开始时间', width: 100, }
-                            ,{field: 'RegistrationTimeEnd', title: '报名开始时间', width: 80}
-                            ,{field: 'CheckUser', title: '是否审核报名信息', width: 80, sort: true}
-                            ,{field: 'type', title: '类型', width: 80, sort: true}
-                            ,{field: 'auditeason', title: '竞赛审核结果', width: 80, sort: true}
-                            ,{field: 'state', title: '状态', width: 80, sort: true}
-                        ]]*/
                     });
 
                 });

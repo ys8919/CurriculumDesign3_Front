@@ -7,5 +7,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://cdb-76mz52ay.cd.tencentcdb.com:10158/Cpt_Registration</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="@134.175.222.24" uuid="bed6c9e8-3560-4a79-9835-d5bdef26cba6">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://134.175.222.24</jdbc-url>
+    </data-source>
   </component>
 </project>
