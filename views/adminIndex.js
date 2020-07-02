@@ -27,7 +27,7 @@ var vmAdminIndex = new Vue({
                         $("#iframeMain").attr("src",elem.attr("href"));
                     });
                     element.on('nav(filter1)', function(elem){
-                        if(elem.attr("href")!="javascript:;"){
+                        if(elem.attr("href")!=="javascript:;"){
                             that.VerifyLogin();//登录验证
                             $("#iframeMain").attr("src",elem.attr("href"));
                         }
@@ -52,7 +52,7 @@ var vmAdminIndex = new Vue({
                     'Content-Type':'application/json'
                 });
             sessionStorage.clear()
-            window.location.href='login.html';
+            window.location.href='/CurriculumDesign3_Front/login.html';
 
         }
 

@@ -14,7 +14,7 @@
 <div id="userList">
     <div class="layui-input-block layui-icon layui-search">
         <input type="text" name="" required  lay-verify="required" placeholder="" v-model="query"  autocomplete="off" class="layui-input-search">
-        <button type="button" class="layui-btn-search layui-btn layui-btn-sm layui-btn-primary ">
+        <button type="button" class="layui-btn-search layui-btn layui-btn-sm layui-btn-primary " @click="searchUser">
             <i class="layui-icon layui-icon-search"></i>
         </button>
     </div>

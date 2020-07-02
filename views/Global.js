@@ -10,7 +10,7 @@ function VerifyLogin () {
             content:'请登录',
             closeBtn: 0,
             yes: function(index, layero) {
-                top.location.href='login.html';
+                top.location.href='/CurriculumDesign3_Front/login.html';
             },
         });
     }
@@ -18,12 +18,12 @@ function VerifyLogin () {
 }
 
 function BackgroundLogin (res) {
-    if(('loginFlag' in res.data)){
+    if(('loginFlag' in res)){
         layer.open({
             title: '提示',
-            content: res.data.msg,
+            content: res.msg,
             yes: function(index, layero) {
-                top.location.href='login.html';
+                top.location.href='/CurriculumDesign3_Front/login.html';
             },
         });
         sessionStorage.clear()
@@ -45,6 +45,25 @@ function authenticationInfo (res) {
             break;
         case 999:
             info='未通过认证'
+            break;
+    }
+    return info
+}
+
+function CompetitionStatusInfo (res) {
+    var info
+    switch (res) {
+        case 1:
+            info='待审核'
+            break;
+        case 2:
+            info='已审核'
+            break;
+        case 3:
+            info='停止报名'
+            break;
+        case 999:
+            info='比赛结束'
             break;
     }
     return info
@@ -73,6 +92,7 @@ export default{
         Vue.prototype.BackgroundLogin= (res) => BackgroundLogin(res);
         Vue.prototype.authenticationInfo= (res) => authenticationInfo(res);
         Vue.prototype.jurisdictionInfo= (res) => jurisdictionInfo(res);
+        Vue.prototype.CompetitionStatusInfo= (res) => CompetitionStatusInfo(res);
     }
 
 }

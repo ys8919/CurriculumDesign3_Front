@@ -1,4 +1,6 @@
-
+[v-cloak]{
+    display: none;
+}
 .containerUser{
     width: 720px;
     height: 620px;

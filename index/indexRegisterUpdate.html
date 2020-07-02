@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script src="../js/axios.js"></script>
+    <link rel="stylesheet" href="../css/index.css" >
+    <script src="../js/vue.min.js"></script>
+    <script src="../layui/layui.all.js"></script>
+    <!--加载meta IE兼容文件-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="layui-layout-body">
+<div id="registerUpdate">
+    <div class="header layui-header">
+        <div class="layui-logo">竞赛报名系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left header-down-nav" lay-filter="bigData">
+            <li class="layui-nav-item"><a href="../index.html">主页</a></li>
+            <li class="layui-nav-item"><a href="index.html">发布竞赛</a></li>
+            <li class="layui-nav-item"><a href="index.html">报名管理</a></li>
+            <li class="layui-nav-item"><a href="index.html">申请发布竞赛</a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right"  lay-filter="filter1" v-cloak>
+            <li class="layui-nav-item"><a href="javascript:;">我的报名</a></li>
+            <li class="layui-nav-item"><a href="javascript:;">我的团队</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;" >
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img" >
+                    {{userName}}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="../index/indexUserInfo.html" >基本资料</a></dd>
+                    <dd><a href="../index/indexUserAuthentication.html" >认证信息</a></dd>
+                    <dd><a href="../index/indexRegisterUpdate.html"  >修改密码</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="javascript:;" @click="Logout">退出</a></li>
+        </ul>
+    </div>
+    <div class="containerRegister "  v-cloak>
+        <form class="layui-form" @submit.prevent="registerUpdate">
+
+            <div class="layui-form-item">
+                <h1 class="layui-text ">修改密码</h1>
+            </div>
+
+            <div class="layui-form-item layui-form-item-info" v-cloak style="margin-top: 100px;">
+                <label class="layui-form-label">账 &nbsp;&nbsp;号</label>
+                <div class="layui-input-block layui-icon ">
+
+                    <input type="text" name="userId" required disabled  lay-verify="required" v-model="userId"  autocomplete="off" class="layui-input layui-disabled">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-info">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block layui-icon ">
+                    <input type="text" name="username" required disabled lay-verify="required" v-model="userName"  autocomplete="off" class="layui-input layui-disabled">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-info">
+                <label class="layui-form-label">旧密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="userPasswd" required lay-verify="required|pass" placeholder="请输入旧密码" v-model="userPasswd"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-info">
+                <label class="layui-form-label">新密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="userNewPasswd" required lay-verify="required|pass" placeholder="请输入新密码" v-model="userNewPasswd"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-info">
+                <label class="layui-form-label">确认密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="userNewPasswd1" required lay-verify="required|confirmPass" placeholder="请再次输入密码" v-model="userNewPasswd1"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="  layui-form-item layui-form-item-info">
+                <h5 class="layui-text " v-text="loginMsg"></h5>
+            </div>
+            <div class="layui-form-item layui-form-item-info">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-anim layui-anim-scale layui-btn-user"  lay-submit lay-filter="formDemo" >修改</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+<script  type="module"src="../views/index/indexRegisterUpdate.js"></script>
+
+</body>
+</html>

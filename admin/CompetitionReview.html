@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>后台管理</title>
     <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
     <link rel="stylesheet" href="../css/index.css" >
     <script src="../js/axios.js"></script>
@@ -11,7 +11,7 @@
 
 </head>
 <body class="layui-layout-body">
-<div id="AuthenticationList">
+<div id="CompetitionReview">
     <div class="layui-input-block layui-icon layui-search">
         <input type="text" name="" required  lay-verify="required" placeholder="" v-model="query"  autocomplete="off" class="layui-input-search">
         <button type="button" class="layui-btn-search layui-btn layui-btn-sm layui-btn-primary " @click="searchUser">
@@ -19,18 +19,18 @@
         </button>
     </div>
     <div style="margin-top: 100px" >
-        <table class="layui-hide" id="userListTable" lay-filter="userListTableTest" ></table>
+        <table class="layui-hide" id="CompetitionReviewTable" lay-filter="CompetitionReviewTableTest"></table>
 
     </div>
 </div>
 
-<script  type="module"src="../views/admin/AuthenticationList.js"></script>
+<script  type="module"src="../views/admin/CompetitionReview.js"></script>
 <script type="text/html" id="barDemo">
-    {{#  if(d.state === 2){ }}
-    <a class="layui-btn layui-btn-xs" lay-event="Authentication">认证</a>
+    {{#  if(d.state === 1){ }}
+    <a class="layui-btn layui-btn-xs" lay-event="noAuthentication">审核</a>
     {{#  } }}
-    {{#  if(d.state === 3){ }}
-    <a class="layui-btn layui-btn-xs" lay-event="noAuthentication">取消认证</a>
+    {{#  if(d.state === 2){ }}
+    <a class="layui-btn layui-btn-xs" lay-event="noAuthentication">撤销审核</a>
     {{#  } }}
 </script>
 

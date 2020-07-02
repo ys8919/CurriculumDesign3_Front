@@ -24,6 +24,31 @@ var vmuserList = new Vue({
     },
     methods: {
         userInfo:function () {
+            this.$nextTick(function () {
+                window. layui.config({
+                    base: '../views/index/'
+                }).use(['element','laypage','jquery','menu'],function(){
+                    var element = layui.element,
+                        laypage = layui.laypage,
+                        $ = layui.$,
+                        menu = layui.menu;
+                    laypage.render({
+                        elem: 'demo'
+                        ,count: 70 //数据总数，从服务端得到
+                    });
+                    menu.init();
+                    /* element.on('nav(filter1)', function(elem){
+                         if(elem.attr("href")!=="javascript:;"){
+                             that.VerifyLogin();//登录验证
+                             top.location.href='/CurriculumDesign3_Front/login.html';
+                             //$("#iframeMain").attr("src",elem.attr("href"));
+                             console.log(elem)
+                         }
+
+                     });*/
+                })
+
+            });
             this.userId=sessionStorage.getItem('userId');
             this.userName=sessionStorage.getItem('userName');
             var that=this
@@ -54,13 +79,13 @@ var vmuserList = new Vue({
 
                     that.userStateInfo=that.authenticationInfo(response.data.data[0].state);//返回认证信息
                 })
-                .catch(error => {
-                    layer.close(loading);
-                    layer.open({
-                        title: '失败',
-                        content:'服务器请求失败'
-                    });
-                });
+             .catch(error => {
+                 layer.close(loading);
+                 layer.open({
+                     title: '失败',
+                     content:'服务器请求失败'
+                 });
+             });
         },
         UserAuthenticationUpdate:function(){
             let loading
@@ -89,9 +114,9 @@ var vmuserList = new Vue({
                         layer.open({
                             title: '提示',
                             content: response.data.msg,
-                            yes: function(index, layero) {
-                                location.reload();
-                                layer.close(index);
+                             yes: function(index, layero) {
+                                 location.reload();
+                                 layer.close(index);
                              },
                         });
                         console.log(response.data);
@@ -105,6 +130,21 @@ var vmuserList = new Vue({
                     });
             }
         },
+        Logout:function () {
+
+            axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/logout.action',
+                {
+                }, {
+                    headers: {
+                        token:sessionStorage.getItem('token') ||'',
+                        //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
+                    },
+                    'Content-Type':'application/json'
+                });
+            sessionStorage.clear()
+            window.location.href='/CurriculumDesign3_Front/login.html';
+
+        }
 
 
 
@@ -113,3 +153,10 @@ var vmuserList = new Vue({
 });
 
 
+window.layui.use('element', function(){
+    var element =  window.layui.element;
+    element.init();
+    element.on('nav(bigData)',function (elem) {
+        console.log(elem);
+    });
+});

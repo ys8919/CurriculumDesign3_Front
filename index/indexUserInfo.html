@@ -2,16 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="../css/index.css" >
+    <title>竞赛报名系统</title>
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <script src="../js/axios.js"></script>
+    <link rel="stylesheet" href="../css/index.css" >
     <script src="../js/vue.min.js"></script>
     <script src="../layui/layui.all.js"></script>
+    <!--加载meta IE兼容文件-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
 
 </head>
 <body class="layui-layout-body">
 <div id="userInfo" v-cloak>
+    <div class="header layui-header">
+        <div class="layui-logo">竞赛报名系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left header-down-nav" lay-filter="bigData">
+            <li class="layui-nav-item"><a href="../index.html">主页</a></li>
+            <li class="layui-nav-item"><a href="index.html">发布竞赛</a></li>
+            <li class="layui-nav-item"><a href="index.html">报名管理</a></li>
+            <li class="layui-nav-item"><a href="index.html">申请发布竞赛</a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right"  lay-filter="filter1" v-cloak>
+            <li class="layui-nav-item"><a href="javascript:;">我的报名</a></li>
+            <li class="layui-nav-item"><a href="javascript:;">我的团队</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;" >
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img" >
+                    {{userName}}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="../index/indexUserInfo.html" >基本资料</a></dd>
+                    <dd><a href="../index/indexUserAuthentication.html" >认证信息</a></dd>
+                    <dd><a href="../index/indexRegisterUpdate.html"  >修改密码</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="javascript:;" @click="Logout">退出</a></li>
+        </ul>
+    </div>
     <div class="containerUser " v-cloak>
         <form class="layui-form" @submit.prevent="updateUserInfo">
 
@@ -56,7 +88,7 @@
         </form>
     </div>
 </div>
-<script  type="module"src="../views/admin/userInfo.js"></script>
+<script  type="module"src="../views/index/indexUserInfo.js"></script>
 
 
 </body>

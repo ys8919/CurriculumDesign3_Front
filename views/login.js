@@ -6,7 +6,7 @@ var vmLogin = new Vue({
         loginShow:true,
         registerShow:false,
         passwordShow:false,
-        userId:'1001',
+        userId:'1002',
         password:'123456',
         registerUsername: '',
         registerPassword1: '',

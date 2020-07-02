@@ -21,6 +21,31 @@ var vmuserList = new Vue({
     },
     methods: {
         userInfo:function () {
+            this.$nextTick(function () {
+                window. layui.config({
+                    base: '../views/index/'
+                }).use(['element','laypage','jquery','menu'],function(){
+                    var element = layui.element,
+                        laypage = layui.laypage,
+                        $ = layui.$,
+                        menu = layui.menu;
+                    laypage.render({
+                        elem: 'demo'
+                        ,count: 70 //数据总数，从服务端得到
+                    });
+                    menu.init();
+                    /* element.on('nav(filter1)', function(elem){
+                         if(elem.attr("href")!=="javascript:;"){
+                             that.VerifyLogin();//登录验证
+                             top.location.href='/CurriculumDesign3_Front/login.html';
+                             //$("#iframeMain").attr("src",elem.attr("href"));
+                             console.log(elem)
+                         }
+
+                     });*/
+                })
+
+            });
             this.userId=sessionStorage.getItem('userId');
             this.userName=sessionStorage.getItem('userName');
         },
@@ -69,7 +94,21 @@ var vmuserList = new Vue({
                     });
             }
         },
+        Logout:function () {
 
+            axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/logout.action',
+                {
+                }, {
+                    headers: {
+                        token:sessionStorage.getItem('token') ||'',
+                        //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
+                    },
+                    'Content-Type':'application/json'
+                });
+            sessionStorage.clear()
+            window.location.href='/CurriculumDesign3_Front/login.html';
+
+        }
 
 
     }
@@ -110,3 +149,10 @@ layui.use('form', function(){
     });
 });
 
+window.layui.use('element', function(){
+    var element =  window.layui.element;
+    element.init();
+    element.on('nav(bigData)',function (elem) {
+        console.log(elem);
+    });
+});
