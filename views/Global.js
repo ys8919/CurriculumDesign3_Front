@@ -81,7 +81,71 @@ function jurisdictionInfo (res) {
         case 3:
             info='管理员'
             break;
+        case 4:
+            info='申请发布竞赛'
+            break;
 
+    }
+    return info
+}
+function CompetitionCheckUserInfo (res) {
+    var info
+    switch (res) {
+        case 1:
+            info='是'
+            break;
+        case 0:
+            info='否'
+            break;
+    }
+    return info
+}
+function CompetitionTypeInfo (res) {
+    var info
+    switch (res) {
+        case 1:
+            info='团队赛'
+            break;
+        case 0:
+            info='个人赛'
+            break;
+    }
+    return info
+}
+
+function teamTypeInfo (res) {
+    var info
+    switch (res) {
+        case 1:
+            info='团队成员'
+            break;
+        case 0:
+            info='队长'
+            break;
+    }
+    return info
+}
+function teamStateInfo (res) {
+    var info
+    switch (res) {
+        case 1:
+            info='待加入'
+            break;
+        case 2:
+            info='已加入'
+            break;
+    }
+    return info
+}
+function registrationStateInfo (res) {
+    var info
+    switch (res) {
+        case 1:
+            info='待审核'
+            break;
+        case 2:
+            info='报名成功'
+            break;
     }
     return info
 }
@@ -93,6 +157,11 @@ export default{
         Vue.prototype.authenticationInfo= (res) => authenticationInfo(res);
         Vue.prototype.jurisdictionInfo= (res) => jurisdictionInfo(res);
         Vue.prototype.CompetitionStatusInfo= (res) => CompetitionStatusInfo(res);
+        Vue.prototype.CompetitionCheckUserInfo= (res) => CompetitionCheckUserInfo(res);
+        Vue.prototype.CompetitionTypeInfo= (res) => CompetitionTypeInfo(res);
+        Vue.prototype.teamTypeInfo= (res) => teamTypeInfo(res);
+        Vue.prototype.teamStateInfo= (res) => teamStateInfo(res);
+        Vue.prototype.registrationStateInfo= (res) => registrationStateInfo(res);
     }
 
 }

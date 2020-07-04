@@ -16,7 +16,7 @@
     <![endif]-->
 </head>
 <body class="layui-layout-body">
-<div id="UserAuthentication">
+<div id="competitionRelease">
     <div class="header layui-header">
         <div class="layui-logo">竞赛报名系统</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
@@ -50,72 +50,71 @@
         </ul>
     </div>
     <div class="containerAuthenticationUpdate "  v-cloak>
-        <form class="layui-form" @submit.prevent="UserAuthenticationUpdate">
+        <form class="layui-form" @submit.prevent="CompetitionReleaseInsert">
 
             <div class="layui-form-item">
-                <h1 class="layui-text ">认证信息</h1>
+                <h1 class="layui-text ">发布竞赛</h1>
             </div>
 
-            <div class="layui-form-item layui-form-item-rz" v-cloak style="margin-top: 50px;">
-                <label class="layui-form-label">账 &nbsp;&nbsp;号</label>
+            <div class="layui-form-item layui-form-item-rz" style="margin-top: 50px;">
+                <label class="layui-form-label">发布账号</label>
                 <div class="layui-input-block layui-icon ">
 
                     <input type="text" name="userId" required disabled  lay-verify="required" v-model="userId"  autocomplete="off" class="layui-input layui-disabled">
                 </div>
             </div>
             <div class="layui-form-item layui-form-item-rz">
-                <label class="layui-form-label">用户名</label>
+                <label class="layui-form-label">竞赛标题</label>
                 <div class="layui-input-block layui-icon ">
-                    <input type="text" name="username" required disabled lay-verify="required" v-model="userName"  autocomplete="off" class="layui-input layui-disabled">
+                    <input type="text" name="competitionName" required lay-verify="required" placeholder="请输入竞赛标题" v-model="competitionName"  autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item layui-form-item-rz">
-                <label class="layui-form-label">认证状态</label>
+                <label class="layui-form-label">竞赛信息</label>
+                <div class="layui-input-block">
+                    <textarea name="competitionInfo" required lay-verify="required" placeholder="请输入" v-model="competitionInfo" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-rz">
+                <label class="layui-form-label">报名审核</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="checkUser" lay-skin="switch" lay-text="是|否" lay-filter="checkbox1">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-rz">
+                <label class="layui-form-label">类型</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="type" value="0" title="个人赛" checked lay-filter="radio1">
+                    <input type="radio" name="type" value="1" title="团队赛" lay-filter="radio1" >
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-item-rz">
+                <label class="layui-form-label">比赛时间</label>
                 <div class="layui-input-block layui-icon ">
-                    <input type="text" name="username" required disabled lay-verify="required" v-model="userStateInfo"  autocomplete="off" class="layui-input layui-disabled">
+                    <input type="text" id="competitionTime" name="competitionTime" style="width: 400px;" required lay-verify="required" placeholder="请选择比赛时间" v-model="competitionTime"  autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item layui-form-item-rz">
-                <label class="layui-form-label">真名</label>
+                <label class="layui-form-label">报名时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="registerPasswd" required lay-verify="required" placeholder="请输入真名" v-model="userRealName"  autocomplete="off" class="layui-input">
+                    <input type="text" id="registrationTime" name="registrationTime" style="width: 400px;" required lay-verify="required" placeholder="请选择报名时间" autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item layui-form-item-rz">
-                <label class="layui-form-label">学校</label>
-                <div class="layui-input-block">
-                    <input type="text" name="registerPasswd" required lay-verify="required" placeholder="请输入学校" v-model="userSchoolName"  autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item layui-form-item-rz">
-                <label class="layui-form-label">学号</label>
-                <div class="layui-input-block">
-                    <input type="text" name="registerPasswd1" required lay-verify="required" placeholder="请输入学号" v-model="userStuNumber"  autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item layui-form-item-rz">
-                <label class="layui-form-label">学历</label>
-                <div class="layui-input-block">
-                    <input type="text" name="registerPasswd1" required lay-verify="required" placeholder="请输入学历" v-model="userEducation"  autocomplete="off" class="layui-input">
-                </div>
-            </div>
+
+
             <div class="  layui-form-item layui-form-item-info">
                 <h5 class="layui-text " v-text="loginMsg"></h5>
             </div>
             <div class="layui-form-item layui-form-item-info">
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-anim layui-anim-scale layui-btn-user"  lay-submit lay-filter="formDemo" >修改</button>
+                    <button class="layui-btn layui-anim layui-anim-scale layui-btn-user"  lay-submit lay-filter="formDemo" >创建</button>
                 </div>
             </div>
-            <div class="layui-form-item layui-form-item-info" v-if="jurisdiction===1">
-                <div class="layui-input-block">
-                    <a  href="javascript:void(0)" class="font-set" @click="applyReleaseCompetition">申请发布竞赛</a>
-                </div>
-            </div>
+
         </form>
     </div>
 </div>
-<script  type="module"src="../views/index/indexUserAuthentication.js"></script>
+<script  type="module" src="../views/index/CompetitionRelease.js"></script>
 
 </body>
 </html>

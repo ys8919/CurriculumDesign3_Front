@@ -41,18 +41,26 @@ var vmuserList = new Vue({
                             ,{field: 'competitionName', title: '竞赛标题', width:150,align:'center'}
                             ,{field: 'chargePersonName', title: '负责人', width:80,align:'center'}
                             ,{field: 'competitionInfo', title: '竞赛信息', width:200,align:'center'}
-                            ,{field: 'releaseTime', title: '生成时间', width: 150,align:'center'}
-                            ,{field: 'CompetitionTime', title: '比赛时间', width: 150,sort: true,align:'center'}
-                            ,{field: 'RegistrationTimeStart', title: '报名开始时间', width: 100,align:'center' }
-                            ,{field: 'RegistrationTimeEnd', title: '报名开始时间', width: 80,align:'center'}
-                            ,{field: 'CheckUser', title: '是否审核报名信息', width: 80, sort: true,align:'center'}
-                            ,{field: 'type', title: '类型', width: 80, sort: true,align:'center'}
-                            ,{field: 'auditeason', title: '竞赛审核结果', width: 80, sort: true,align:'center'}
+                            ,{field: 'releaseTime', title: '生成时间', width: 150,align:'center',sort: true}
+                            ,{field: 'competitionTime', title: '比赛时间', width: 150,sort: true,align:'center'}
+                            ,{field: 'registrationTimeStart', title: '报名开始时间', width: 100,align:'center',sort: true }
+                            ,{field: 'registrationTimeEnd', title: '报名开始时间', width: 80,align:'center',sort: true}
+                            ,{field: 'checkUser', title: '是否审核报名信息', width: 80, sort: true,align:'center' ,
+                                templet: function(d){
+                                    //将数字转成字符模式显示
+                                    return  that.CompetitionCheckUserInfo(d.checkUser)
+                                }}
+                            ,{field: 'type', title: '竞赛类型', width: 80, sort: true,align:'center', templet: function(d){
+                                    //将数字转成字符模式显示
+                                    return  that.CompetitionTypeInfo(d.type)
+                                }}
+
                             ,{field: 'state', title: '状态', width: 120,align:'center', sort: true,
                                 templet: function(d){
                                     //将数字转成字符模式显示
                                     return  that.CompetitionStatusInfo(d.state)
                                 }}
+                            ,{field: 'auditeason', title: '竞赛审核结果', width: 80, sort: true,align:'center'}
                             ,{fixed: 'right', width: 170, align:'center', toolbar: '#barDemo'}
                         ]],
                         done: function(res, curr, count){

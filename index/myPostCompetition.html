@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>竞赛报名系统</title>
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" href="../css/index.css" >
+    <script src="../js/axios.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <script src="../layui/layui.all.js"></script>
+    <!--加载meta IE兼容文件-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="myPostCompetition" v-cloak>
+    <div class="header layui-header">
+        <div class="layui-logo">竞赛报名系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left header-down-nav" lay-filter="bigData">
+            <li class="layui-nav-item"><a href="../index.html">主页</a></li>
+            <li class="layui-nav-item" v-if="jurisdiction==2">
+                <a href="javascript:;">发布竞赛</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="CompetitionRelease.html" >发布竞赛</a></dd>
+                    <dd><a href="myPostCompetition.html" >我的发布</a></dd>
+
+                </dl>
+            </li>
+            <li class="layui-nav-item" v-if="jurisdiction==2"><a href="RegistrationManagement.html" >报名管理</a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right"  lay-filter="filter1" v-cloak>
+            <li class="layui-nav-item"><a href="myRegistration.html">我的报名</a></li>
+            <li class="layui-nav-item"><a href="myTeam.html">我的团队</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;" >
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img" >
+                    {{userName}}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="indexUserInfo.html" >基本资料</a></dd>
+                    <dd><a href="indexUserAuthentication.html" >认证信息</a></dd>
+                    <dd><a href="indexRegisterUpdate.html"  >修改密码</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="javascript:;" @click="Logout">退出</a></li>
+        </ul>
+    </div>
+
+    <div class="banner">
+        <div class="cont w1000">
+            <div class="title">
+                <h3>知识竞赛</h3>
+                <h4>报名系统</h4>
+                <h5>我的发布</h5>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="content" >
+        <div class="layui-input-block layui-icon layui-search">
+            <input type="text" name="" required  lay-verify="required" placeholder="" v-model="query"  autocomplete="off" class="layui-input-search">
+            <button type="button" class="layui-btn-search layui-btn layui-btn-sm layui-btn-primary " @click="searchUser">
+                <i class="layui-icon layui-icon-search"></i>
+            </button>
+        </div>
+        <div style="margin-top: 20px" >
+            <table class="layui-hide" id="userListTable" lay-filter="userListTableTest"></table>
+
+        </div>
+    </div>
+
+    <div class="footer-wrap">
+        <div class="footer w1000">
+            <div class="qrcode">
+
+            </div>
+            <div class="practice-mode">
+                <div class="text">
+                    @yx8991
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script  type="module" src="../views/index/myPostCompetition.js"></script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+</body>
+</html>

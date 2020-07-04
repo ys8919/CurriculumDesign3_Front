@@ -6,6 +6,7 @@
     <title>竞赛报名系统</title>
     <link rel="stylesheet" type="text/css" href="layui/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css" >
     <script src="js/axios.js"></script>
     <script src="js/vue.min.js"></script>
     <script src="layui/layui.all.js"></script>
@@ -16,19 +17,25 @@
     <![endif]-->
 </head>
 <body>
-<div id="index">
+<div id="index" v-cloak>
 <div class="header layui-header">
     <div class="layui-logo">竞赛报名系统</div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left header-down-nav" lay-filter="bigData">
         <li class="layui-nav-item"><a href="index.html">主页</a></li>
-        <li class="layui-nav-item"><a href="index.html">发布竞赛</a></li>
-        <li class="layui-nav-item"><a href="index.html">报名管理</a></li>
-        <li class="layui-nav-item"><a href="index.html">申请发布竞赛</a></li>
+        <li class="layui-nav-item" v-if="jurisdiction==2">
+            <a href="javascript:;">发布竞赛</a>
+            <dl class="layui-nav-child">
+                <dd><a href="index/CompetitionRelease.html" >发布竞赛</a></dd>
+                <dd><a href="index/myPostCompetition.html" >我的发布</a></dd>
+
+            </dl>
+        </li>
+        <li class="layui-nav-item" v-if="jurisdiction==2"><a href="index/RegistrationManagement.html" >报名管理</a></li>
     </ul>
     <ul class="layui-nav layui-layout-right"  lay-filter="filter1" v-cloak>
-        <li class="layui-nav-item"><a href="javascript:;">我的报名</a></li>
-        <li class="layui-nav-item"><a href="javascript:;">我的团队</a></li>
+        <li class="layui-nav-item"><a href="index/myRegistration.html">我的报名</a></li>
+        <li class="layui-nav-item"><a href="index/myTeam.html">我的团队</a></li>
         <li class="layui-nav-item">
             <a href="javascript:;" >
                 <img src="http://t.cn/RCzsdCq" class="layui-nav-img" >
@@ -54,9 +61,14 @@
     </div>
 </div>
 
-<div class="content" v-cloak>
+<div class="content" >
     <div class="cont w1000">
-
+        <div class="layui-input-block layui-icon layui-search">
+            <input type="text" name="" required  lay-verify="required" placeholder="" v-model="query"  autocomplete="off" class="layui-input-search">
+            <button type="button" class="layui-btn-search layui-btn layui-btn-sm layui-btn-primary " @click="searchUser">
+                <i class="layui-icon layui-icon-search"></i>
+            </button>
+        </div>
         <div class="list-item">
             <div class="item" v-for="value in data">
                 <div class="layui-fluid">
@@ -66,13 +78,17 @@
                         </div>
                         <div class="layui-col-xs12 layui-col-sm8 layui-col-md7">
                             <div class="item-cont">
-                                    <h3>{{value.competitionName}}<button class="layui-btn layui-btn-danger new-icon">new</button></h3>
+                                    <h3>{{value.competitionName}}
+                                        <button class="layui-btn layui-btn-danger new-icon" style="width: 50px" v-if="value.state===2">报名中</button>
+                                        <button class="layui-btn layui-btn-danger new-icon" style="width: 50px" v-if="value.state===3">比赛中</button>
+                                        <button class="layui-btn layui-btn-danger new-icon" style="width: 70px" v-if="value.state===4">比赛结束</button>
+                                    </h3>
                                 <h5 v-if="value.type===0">个人赛</h5>
                                 <h5 v-else-if="value.type===1">团队赛</h5>
-                                <p>{{value.competitionInfo}}</p>
-                                <p>报名时间：{{value.registrationTimeStart+' 至 '+value.registrationTimeStart}}</p>
+                                <p>主办方：{{value.chargePersonName}}</p>
+                                <p>报名时间：{{value.registrationTimeStart+' 至 '+value.registrationTimeEnd}}</p>
                                 <p>比赛时间：{{value.competitionTime}}</p>
-                                <a href="javascript:;" class="go-icon"></a>
+                                <a href="javascript:;" @click="btnInfo(value.competitionId)"><button class="layui-btn layui-btn-danger new-icon">报名</button></a>
                             </div>
                         </div>
                     </div>

@@ -56,6 +56,7 @@ var vmLogin = new Vue({
                             sessionStorage.setItem('userId', response.data.userId)
                             sessionStorage.setItem('userName', response.data.userName)
                             sessionStorage.setItem('jurisdiction', response.data.jurisdiction)
+                            sessionStorage.setItem('userState', response.data.state)
                             if(response.data.jurisdiction===3){
                                 window.location.href='adminIndex.html';
                             }else{

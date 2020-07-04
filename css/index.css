@@ -19,6 +19,23 @@
     box-shadow: 0 3px 18px rgba(100, 0, 0, 0.5);
     font-size: 16px;
 }
+.containerCompetitionDetails{
+    width: 820px;
+    height:620px;
+    min-height: 620px;
+    max-height: 620px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    padding: 20px;
+    z-index: 130;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 3px 18px rgba(100, 0, 0, 0.5);
+    font-size: 16px;
+}
 .containerRegister{
     width: 720px;
     height: 720px;
@@ -59,6 +76,11 @@
     border-radius: 5px;
     width: 300px;
     height: 40px;
+    font-size: 15px;
+}
+.layui-textarea{
+    border-radius: 5px;
+    width: 300px;
     font-size: 15px;
 }
 .layui-search{
@@ -133,4 +155,19 @@ a:hover{
 .layui-form-item-rz{
     margin-top: 30px;
     margin-left: 100px;
+}
+.layui-form-item-infoList{
+    margin-top: 30px;
+    position: absolute;
+    margin-left: 175px;
+}
+.layui-form-item-comInfo{
+    text-align: center;
+    margin-top: 150px;
+    margin-bottom: 20px;
+}
+.layui-form-item-comInfo-item {
+
+    margin-top:30px;
+
 }

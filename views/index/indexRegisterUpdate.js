@@ -8,7 +8,8 @@ var vmuserList = new Vue({
         userPasswd:'',
         userNewPasswd:'',
         userNewPasswd1:'',
-        loginMsg:''
+        loginMsg:'',
+        jurisdiction:0,
 
     },
     created(){
@@ -16,7 +17,7 @@ var vmuserList = new Vue({
         //this.userInfo();
     },mounted(){
         //自动加载indexs方法
-        //this.VerifyLogin();//登录验证
+        this.VerifyLogin();//登录验证
         this.userInfo();
     },
     methods: {
@@ -29,10 +30,7 @@ var vmuserList = new Vue({
                         laypage = layui.laypage,
                         $ = layui.$,
                         menu = layui.menu;
-                    laypage.render({
-                        elem: 'demo'
-                        ,count: 70 //数据总数，从服务端得到
-                    });
+                    element.init();
                     menu.init();
                     /* element.on('nav(filter1)', function(elem){
                          if(elem.attr("href")!=="javascript:;"){
@@ -48,9 +46,11 @@ var vmuserList = new Vue({
             });
             this.userId=sessionStorage.getItem('userId');
             this.userName=sessionStorage.getItem('userName');
+            this.jurisdiction= sessionStorage.getItem('jurisdiction')
         },
         registerUpdate:function(){
             let loading
+            var that=this
             if(this.userId!==""&&this.userName!==""&&this.userEmail!==""&&this.userTel!==""){
                 loading=layer.load(2, {
                     shade: false,
@@ -71,6 +71,7 @@ var vmuserList = new Vue({
                     })
                     .then(response => {
                         layer.close(loading);
+                        that.BackgroundLogin(response.data);
                         layer.open({
                             title: '提示',
                             content: response.data.msg,
@@ -149,10 +150,3 @@ layui.use('form', function(){
     });
 });
 
-window.layui.use('element', function(){
-    var element =  window.layui.element;
-    element.init();
-    element.on('nav(bigData)',function (elem) {
-        console.log(elem);
-    });
-});

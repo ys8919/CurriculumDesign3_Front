@@ -7,8 +7,8 @@ var vmuserList = new Vue({
         userName:'',
         userEmail:'',
         userTel:'',
-        loginMsg:''
-
+        loginMsg:'',
+        jurisdiction:0,
     },
     created(){
         //自动加载indexs方法
@@ -16,7 +16,7 @@ var vmuserList = new Vue({
     },mounted(){
         this.$nextTick(function () {
             //自动加载indexs方法
-            //this.VerifyLogin();//登录验证
+            this.VerifyLogin();//登录验证
             this.userInfo();
         })
     },
@@ -40,6 +40,7 @@ var vmuserList = new Vue({
                         laypage = layui.laypage,
                         $ = layui.$,
                         menu = layui.menu;
+                    element.init();
                     laypage.render({
                         elem: 'demo'
                         ,count: 70 //数据总数，从服务端得到
@@ -59,6 +60,7 @@ var vmuserList = new Vue({
             });
             this.userId=sessionStorage.getItem('userId');
             this.userName=sessionStorage.getItem('userName');
+            this.jurisdiction= sessionStorage.getItem('jurisdiction')
             var that=this
             let loading
             loading=layer.load(2, {
@@ -79,6 +81,7 @@ var vmuserList = new Vue({
                 })
                 .then(response => {
                     layer.close(loading);
+                    that.BackgroundLogin(response.data);
                     that.userEmail=response.data.data.email
                     that.userTel=response.data.data.tel
 
@@ -152,11 +155,3 @@ var vmuserList = new Vue({
 
 });
 
-
-window.layui.use('element', function(){
-    var element =  window.layui.element;
-    element.init();
-    element.on('nav(bigData)',function (elem) {
-        console.log(elem);
-    });
-});

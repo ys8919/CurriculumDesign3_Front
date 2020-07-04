@@ -26,6 +26,7 @@ var vmuserList = new Vue({
         },
         registerUpdate:function(){
             let loading
+            var that=this
             if(this.userId!==""&&this.userName!==""&&this.userEmail!==""&&this.userTel!==""){
                 loading=layer.load(2, {
                     shade: false,
@@ -46,6 +47,7 @@ var vmuserList = new Vue({
                     })
                     .then(response => {
                         layer.close(loading);
+                        that.BackgroundLogin(response.data);
                         layer.open({
                             title: '提示',
                             content: response.data.msg,

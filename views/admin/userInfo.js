@@ -54,6 +54,7 @@ var vmuserList = new Vue({
                 })
                 .then(response => {
                     layer.close(loading);
+                    that.BackgroundLogin(response.data);
                     that.userEmail=response.data.data.email
                     that.userTel=response.data.data.tel
 

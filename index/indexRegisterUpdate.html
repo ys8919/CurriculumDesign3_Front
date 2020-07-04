@@ -22,13 +22,19 @@
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left header-down-nav" lay-filter="bigData">
             <li class="layui-nav-item"><a href="../index.html">主页</a></li>
-            <li class="layui-nav-item"><a href="index.html">发布竞赛</a></li>
-            <li class="layui-nav-item"><a href="index.html">报名管理</a></li>
-            <li class="layui-nav-item"><a href="index.html">申请发布竞赛</a></li>
+            <li class="layui-nav-item" v-if="jurisdiction==2">
+                <a href="javascript:;">发布竞赛</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="CompetitionRelease.html" >发布竞赛</a></dd>
+                    <dd><a href="myPostCompetition.html" >我的发布</a></dd>
+
+                </dl>
+            </li>
+            <li class="layui-nav-item" v-if="jurisdiction==2"><a href="RegistrationManagement.html" >报名管理</a></li>
         </ul>
         <ul class="layui-nav layui-layout-right"  lay-filter="filter1" v-cloak>
-            <li class="layui-nav-item"><a href="javascript:;">我的报名</a></li>
-            <li class="layui-nav-item"><a href="javascript:;">我的团队</a></li>
+            <li class="layui-nav-item"><a href="myRegistration.html">我的报名</a></li>
+            <li class="layui-nav-item"><a href="myTeam.html">我的团队</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;" >
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img" >

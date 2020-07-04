@@ -46,13 +46,15 @@ var vmuserList = new Vue({
                 })
                 .then(response => {
                     layer.close(loading);
+                    that.BackgroundLogin(response.data);
                     that.userSchoolName=response.data.data[0].schoolName
                     that.userStuNumber=response.data.data[0].stuNumber
                     that.userRealName=response.data.data[0].realName
                     that.userEducation=response.data.data[0].education
                     that.userState=response.data.data[0].state
-
                     that.userStateInfo=that.authenticationInfo(response.data.data[0].state);//返回认证信息
+                    sessionStorage.setItem('jurisdiction', response.data.data[0].jurisdiction)
+                    sessionStorage.setItem('userState', response.data.data[0].state)
                 })
                 .catch(error => {
                     layer.close(loading);

@@ -7,8 +7,14 @@
     <file url="file://$PROJECT_DIR$/views/admin/PublisherManagement.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/admin/UserAuthentication.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/admin/registerUpdate.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/index/CompetitionDetails.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/index/CompetitionRelease.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/index/RegistrationManagement.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/index/indexRegisterUpdate.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/index/indexUserAuthentication.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/index/indexUserInfo.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/index/myPostCompetition.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/index/myRegistration.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/index/myTeam.js" charset="UTF-8" />
   </component>
 </project>
