@@ -17,7 +17,7 @@
 
 </head>
 <body class="layui-layout-body">
-<div id="userInfo" v-cloak>
+<div id="createTeam" v-cloak>
     <div class="header layui-header">
         <div class="layui-logo">竞赛报名系统</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
@@ -58,50 +58,49 @@
         </ul>
     </div>
     <div class="containerUser " v-cloak>
-        <form class="layui-form" @submit.prevent="updateUserInfo">
+        <form class="layui-form" @submit.prevent="createTeamClick">
 
             <div class="layui-form-item">
-                <h1 class="layui-text ">个人信息</h1>
+                <h1 class="layui-text ">创建团队</h1>
             </div>
 
             <div class="layui-form-item layui-form-item-info" v-cloak style="margin-top: 100px;">
-                <label class="layui-form-label">账 &nbsp;&nbsp;号</label>
+                <label class="layui-form-label">创建人账号</label>
                 <div class="layui-input-block layui-icon ">
 
                     <input type="text" name="userId" required disabled  lay-verify="required" v-model="userId"  autocomplete="off" class="layui-input layui-disabled">
                 </div>
             </div>
             <div class="layui-form-item layui-form-item-info">
-                <label class="layui-form-label">用户名</label>
+                <label class="layui-form-label">团队名</label>
                 <div class="layui-input-block layui-icon ">
-                    <input type="text" name="username" required  lay-verify="required" v-model="userName"  autocomplete="off" class="layui-input">
+                    <input type="text" name="username" required  lay-verify="required" v-model="teamName"  autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item layui-form-item-info">
-                <label class="layui-form-label">邮 &nbsp;&nbsp;箱</label>
+                <label class="layui-form-label">邀请成员</label>
                 <div class="layui-input-block">
-                    <input type="text"  name="email" required  lay-verify="email" v-model="userEmail"  autocomplete="off" class="layui-input">
+                    <input type="text" name="tel"  v-model="inviteMembers" placeholder="请输入成员id" autocomplete="off" class="layui-input" style="width: 200px;">
+                    <a class="layui-btn layui-btn-xs" @click="inviteMember" style=" position: absolute;margin-left:210px;margin-top: -35px;">邀请</a>
                 </div>
             </div>
-            <div class="layui-form-item layui-form-item-info">
-                <label class="layui-form-label">手 &nbsp;&nbsp;机</label>
-                <div class="layui-input-block">
-                    <input type="text" name="tel" required  lay-verify="phone" v-model="userTel"  autocomplete="off" class="layui-input">
-                </div>
+            <div class="  layui-form-item layui-form-item-info">
+                <label class="layui-form-label">已邀请：</label>
+                <h4 class="layui-text " v-text="Invited"></h4>
             </div>
             <div class="  layui-form-item layui-form-item-info">
                 <h5 class="layui-text " v-text="loginMsg"></h5>
             </div>
             <div class="layui-form-item layui-form-item-info">
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-anim layui-anim-scale layui-btn-user"  lay-submit lay-filter="formDemo" >修改</button>
+                    <button class="layui-btn layui-anim layui-anim-scale layui-btn-user"  lay-submit lay-filter="formDemo" >创建团队</button>
                 </div>
             </div>
 
         </form>
     </div>
 </div>
-<script  type="module"src="../views/index/indexUserInfo.js"></script>
+<script  type="module"src="../views/index/createTeam.js"></script>
 
 
 </body>

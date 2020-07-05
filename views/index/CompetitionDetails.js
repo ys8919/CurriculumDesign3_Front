@@ -1,6 +1,7 @@
 
 import apiUrl from '../Global.js'
 Vue.use(apiUrl);
+var form=layui.form;
 var vmindex = new Vue({
     el: '#CompetitionDetails',
     data:{
@@ -153,6 +154,38 @@ var vmindex = new Vue({
                         });
                     });
             }else if(this.competitionType===1){
+                layer.open({
+                    title: '提示',
+                    area: ['500px', '300px'],
+                    btn: ['确定', '创建团队'],
+                    btnAlign: 'c',
+                     content: '<div class="layui-form-item layui-form ">' +
+                '<label class="layui-form-label">选择团队</label>' +
+                '<div class="layui-input-block">' +
+                '<select name="range" id="range" lay-filter="selectCompetition">' +
+                '<option value="">请选择</option>' +
+                '<option value="300">300</option>' +
+                '<option value="500">500</option>' +
+                '<option value="1000">1000</option>' +
+                '<option value="2000">2000</option>' +
+                '</select>' +
+                '</div>' +
+                '</div>'+
+                         '<script> '+
+                         'var form=layui.form; ' +
+                         'form.render(\'select\',\'selectCompetition\');' +
+                         ''+'</script>'
+                    ,
+                    yes: function(index, layero) {
+                        location.reload();
+                        layer.close(index);
+                    },
+                    btn2: function(index, layero) {
+                        window.location.href='/CurriculumDesign3_Front/index/createTeam.html';
+                        layer.close(index);
+                    },
+                });
+
 
             }
 

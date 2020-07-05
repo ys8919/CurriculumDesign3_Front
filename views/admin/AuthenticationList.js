@@ -65,11 +65,12 @@ var vmuserList = new Vue({
                         if(layEvent === 'Authentication'){ //认证
                             //do somehing
                             let loading
-                            loading=layer.load(2, {
-                                shade: false,
-                                time: 60*1000
-                            });
+
                             if(data.state===2){
+                                loading=layer.load(2, {
+                                    shade: false,
+                                    time: 60*1000
+                                });
                                 axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/userExamine.action',
                                     {
                                         userId:data.userId,
@@ -112,11 +113,12 @@ var vmuserList = new Vue({
                             //layer.msg('查看');
                         } else if(layEvent === 'noAuthentication'){ //取消认证
                             let loading
-                            loading=layer.load(2, {
-                                shade: false,
-                                time: 60*1000
-                            });
+
                             if(data.state===3){
+                                loading=layer.load(2, {
+                                    shade: false,
+                                    time: 60*1000
+                                });
                                 axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/userExamine.action',
                                     {
                                         userId:data.userId,

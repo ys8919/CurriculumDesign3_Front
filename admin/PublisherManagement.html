@@ -24,13 +24,13 @@
     </div>
 </div>
 
-<script  type="module"src="../views/admin/PublisherManagement.js"></script>
+<script  type="module" src="../views/admin/PublisherManagement.js"></script>
 <script type="text/html" id="barDemo">
     {{#  if(d.jurisdiction === 2){ }}
-    <a class="layui-btn layui-btn-xs" lay-event="noAuthentication">取消发布资格</a>
+    <a class="layui-btn layui-btn-xs" lay-event="noToQualify">取消发布资格</a>
     {{#  } }}
     {{#  if(d.jurisdiction === 4){ }}
-    <a class="layui-btn layui-btn-xs" lay-event="noAuthentication">给予发布资格</a>
+    <a class="layui-btn layui-btn-xs" lay-event="toQualify">给予发布资格</a>
     {{#  } }}
 
 

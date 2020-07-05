@@ -68,48 +68,184 @@ var vmuserList = new Vue({
 
                             that.BackgroundLogin(res);  //后台是否登录回调
                         }
-                        /*,cols: [[ //表头
-
-
-                            ,{field: 'competitionId', title: 'ID', width:150, sort: true}
-                            ,{field: 'competitionName', title: '竞赛标题', width:150}
-                            ,{field: 'chargePersonId', title: '负责人', width:80,}
-                            ,{field: 'competitionInfo', title: '竞赛信息', width:200}
-                            ,{field: 'releaseTime', title: '生成时间', width: 150}
-                            ,{field: 'CompetitionTime', title: '比赛时间', width: 150,sort: true}
-                            ,{field: 'RegistrationTimeStart', title: '报名开始时间', width: 100, }
-                            ,{field: 'RegistrationTimeEnd', title: '报名开始时间', width: 80}
-                            ,{field: 'CheckUser', title: '是否审核报名信息', width: 80, sort: true}
-                            ,{field: 'type', title: '类型', width: 80, sort: true}
-                            ,{field: 'auditeason', title: '竞赛审核结果', width: 80, sort: true}
-                            ,{field: 'state', title: '状态', width: 80, sort: true}
-                        ]]*/
                     });
                     table.on('tool(CompetitionReviewTableTest)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
                         var data = obj.data; //获得当前行数据
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
 
-                        if(layEvent === 'detail'){ //查看
+                        if(layEvent === 'competitionReviewState'){ //认证
                             //do somehing
-                            layer.msg('暂未开放');
-                        } else if(layEvent === 'del'){ //删除
-                            layer.msg('暂未开放');
-                            /* layer.confirm('真的删除行么', function(index){
-                                 //obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                                // layer.close(index);
-                                 //向服务端发送删除指令
+                            let loading
 
-                             });*/
-                        } else if(layEvent === 'edit'){ //编辑
-                            //do something
-                            layer.msg('暂未开放');
-                            //同步更新缓存对应的值
-                            /* obj.update({
-                                 username: '123'
-                                 ,title: 'xxx'
-                             });*/
-                        } else if(layEvent === 'LAYTABLE_TIPS'){
+                            if(data.state===1){
+                                layer.open({
+                                    title: '提示',
+                                    content: '审核：'+data.competitionName,
+                                    btn: ['通过', '不通过'],
+                                    btnAlign: 'c',
+                                    yes: function(index, layero) {
+                                        layer.msg('通过');
+                                        loading=layer.load(2, {
+                                            shade: false,
+                                            time: 60*1000
+                                        });
+                                        axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/competitionExamine.action',
+                                            {
+                                                competitionId:data.competitionId,
+                                                state:2,
+                                            }, {
+                                                headers: {
+                                                    token:sessionStorage.getItem('token') ||'',
+                                                    //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
+                                                },
+                                                'Content-Type':'application/json'  //如果写成contentType会报错
+                                            })
+                                            .then(response => {
+                                                layer.close(loading);
+                                                layer.open({
+                                                    title: '提示',
+                                                    content: response.data.msg,
+                                                    yes: function(index, layero) {
+                                                        table.reload('CompetitionReviewTable',{
+                                                            where: { //设定异步数据接口的额外参数，任意设
+                                                            }
+                                                            , page: {
+                                                                curr: 1 //重新从第 1 页开始
+                                                            }
+                                                        })
+                                                        layer.close(index);
+                                                    },
+                                                });
+                                                console.log(response.data);
+                                            })
+                                            .catch(error => {
+                                                layer.close(loading);
+                                                layer.open({
+                                                    title: '失败',
+                                                    content:'服务器请求失败'
+                                                });
+                                            });
+                                        layer.close(index);
+                                    },
+                                    btn2: function(index, layero) {
+                                        layer.prompt({
+                                            formType: 2,
+                                            value: '',
+                                            title: '审核不通过原因',
+                                            area: ['300px', '100px'] //自定义文本域宽高
+                                        }, function(value, index, elem){
+                                            loading=layer.load(2, {
+                                                shade: false,
+                                                time: 60*1000
+                                            });
+                                            axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/competitionExamine.action',
+                                                {
+                                                    competitionId:data.competitionId,
+                                                    auditeason:value,
+                                                    state:999,
+                                                }, {
+                                                    headers: {
+                                                        token:sessionStorage.getItem('token') ||'',
+                                                        //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
+                                                    },
+                                                    'Content-Type':'application/json'  //如果写成contentType会报错
+                                                })
+                                                .then(response => {
+                                                    layer.close(loading);
+                                                    layer.open({
+                                                        title: '提示',
+                                                        content: response.data.msg,
+                                                        yes: function(index, layero) {
+                                                            table.reload('CompetitionReviewTable',{
+                                                                where: { //设定异步数据接口的额外参数，任意设
+                                                                }
+                                                                , page: {
+                                                                    curr: 1 //重新从第 1 页开始
+                                                                }
+                                                            })
+                                                            layer.close(index);
+                                                        },
+                                                    });
+                                                    console.log(response.data);
+                                                })
+                                                .catch(error => {
+                                                    layer.close(loading);
+                                                    layer.open({
+                                                        title: '失败',
+                                                        content:'服务器请求失败'
+                                                    });
+                                                });
+                                            layer.close(index);
+                                        });
+
+
+                                        layer.close(index);
+                                    },
+                                });
+
+
+                            }else{
+                                layer.msg('不允许操作');
+                            }
+                            //layer.msg('查看');
+                        } else if(layEvent === 'noCompetitionReviewState'){ //取消认证
+                            let loading
+
+                            if(data.state===2){
+                                layer.prompt({
+                                    formType: 2,
+                                    value: '',
+                                    title: '撤销审核原因',
+                                    area: ['300px', '100px'] //自定义文本域宽高
+                                }, function(value, index, elem){
+                                    loading=layer.load(2, {
+                                        shade: false,
+                                        time: 60*1000
+                                    });
+                                    axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/competitionExamine.action',
+                                        {
+                                            competitionId:data.competitionId,
+                                            auditeason:value,
+                                            state:999,
+                                        }, {
+                                            headers: {
+                                                token:sessionStorage.getItem('token') ||'',
+                                                //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
+                                            },
+                                            'Content-Type':'application/json'  //如果写成contentType会报错
+                                        })
+                                        .then(response => {
+                                            layer.close(loading);
+                                            layer.open({
+                                                title: '提示',
+                                                content: response.data.msg,
+                                                yes: function(index, layero) {
+                                                    table.reload('CompetitionReviewTable',{
+                                                        where: { //设定异步数据接口的额外参数，任意设
+                                                        }
+                                                        , page: {
+                                                            curr: 1 //重新从第 1 页开始
+                                                        }
+                                                    })
+                                                    layer.close(index);
+                                                },
+                                            });
+                                            console.log(response.data);
+                                        })
+                                        .catch(error => {
+                                            layer.close(loading);
+                                            layer.open({
+                                                title: '失败',
+                                                content:'服务器请求失败'
+                                            });
+                                        });
+                                    layer.close(index);
+                                });
+                            }else{
+                                layer.msg('不允许操作');
+                            }
+                        }  else if(layEvent === 'LAYTABLE_TIPS'){
                             layer.alert('Hi，头部工具栏扩展的右侧图标。');
                         }
                     });

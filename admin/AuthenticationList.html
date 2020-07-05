@@ -26,6 +26,9 @@
 
 <script  type="module"src="../views/admin/AuthenticationList.js"></script>
 <script type="text/html" id="barDemo">
+    {{#  if(d.state === 1){ }}
+    <a class="layui-btn layui-btn-xs  layui-disabled"  lay-event="">用户未提交</a>
+    {{#  } }}
     {{#  if(d.state === 2){ }}
     <a class="layui-btn layui-btn-xs" lay-event="Authentication">认证</a>
     {{#  } }}

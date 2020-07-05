@@ -60,26 +60,103 @@ var vmuserList = new Vue({
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
 
-                        if(layEvent === 'detail'){ //查看
+                        if(layEvent === 'toQualify'){ //发布资格
                             //do somehing
-                            layer.msg('暂未开放');
-                        } else if(layEvent === 'del'){ //删除
-                            layer.msg('暂未开放');
-                            /* layer.confirm('真的删除行么', function(index){
-                                 //obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                                // layer.close(index);
-                                 //向服务端发送删除指令
+                            let loading
 
-                             });*/
-                        } else if(layEvent === 'edit'){ //编辑
-                            //do something
-                            layer.msg('暂未开放');
-                            //同步更新缓存对应的值
-                            /* obj.update({
-                                 username: '123'
-                                 ,title: 'xxx'
-                             });*/
-                        } else if(layEvent === 'LAYTABLE_TIPS'){
+                            if(data.jurisdiction===4){
+                                loading=layer.load(2, {
+                                    shade: false,
+                                    time: 60*1000
+                                });
+                                axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/modifyUser.action',
+                                    {
+                                        userId:data.userId,
+                                        jurisdiction:2,
+                                    }, {
+                                        headers: {
+                                            token:sessionStorage.getItem('token') ||'',
+                                            //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
+                                        },
+                                        'Content-Type':'application/json'  //如果写成contentType会报错
+                                    })
+                                    .then(response => {
+                                        layer.close(loading);
+                                        layer.open({
+                                            title: '提示',
+                                            content: response.data.msg,
+                                            yes: function(index, layero) {
+                                                table.reload('userListTable',{
+                                                    where: { //设定异步数据接口的额外参数，任意设
+                                                    }
+                                                    , page: {
+                                                        curr: 1 //重新从第 1 页开始
+                                                    }
+                                                })
+                                                layer.close(index);
+                                            },
+                                        });
+                                        console.log(response.data);
+                                    })
+                                    .catch(error => {
+                                        layer.close(loading);
+                                        layer.open({
+                                            title: '失败',
+                                            content:'服务器请求失败'
+                                        });
+                                    });
+                            }else{
+                                layer.msg('不允许操作');
+                            }
+                            //layer.msg('查看');
+                        } else if(layEvent === 'noToQualify'){ //取消发布资格
+                            let loading
+
+                            if(data.jurisdiction===2){
+                                loading=layer.load(2, {
+                                    shade: false,
+                                    time: 60*1000
+                                });
+                                axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/modifyUser.action',
+                                    {
+                                        userId:data.userId,
+                                        jurisdiction:1,
+                                    }, {
+                                        headers: {
+                                            token:sessionStorage.getItem('token') ||'',
+                                            //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
+                                        },
+                                        'Content-Type':'application/json'  //如果写成contentType会报错
+                                    })
+                                    .then(response => {
+                                        layer.close(loading);
+                                        layer.open({
+                                            title: '提示',
+                                            content: response.data.msg,
+                                            yes: function(index, layero) {
+                                                table.reload('userListTable',{
+                                                    where: { //设定异步数据接口的额外参数，任意设
+                                                    }
+                                                    , page: {
+                                                        curr: 1 //重新从第 1 页开始
+                                                    }
+                                                })
+                                                layer.close(index);
+                                            },
+                                        });
+                                        console.log(response.data);
+                                    })
+                                    .catch(error => {
+                                        layer.close(loading);
+                                        layer.open({
+                                            title: '失败',
+                                            content:'服务器请求失败'
+                                        });
+                                    });
+                            }else{
+                                layer.msg('不允许操作');
+                            }
+                        }  else if(layEvent === 'LAYTABLE_TIPS'){
                             layer.alert('Hi，头部工具栏扩展的右侧图标。');
                         }
                     });

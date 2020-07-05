@@ -98,14 +98,6 @@ var vmuserList = new Vue({
         },
         CompetitionReleaseInsert:function(){
             let loading
-            console.log(this.competitionName)
-            console.log(this.checkUser)
-            console.log(this.competitionInfo)
-            console.log(this.competitionTime)
-            console.log(this.registrationTimeEnd.toString())
-            console.log(this.registrationTimeStart)
-            console.log(this.type)
-            console.log(this.userId)
             if(this.competitionName!==""&&this.checkUser!==""&&this.competitionInfo!==""&&
                 this.competitionTime!==""&&this.registrationTimeEnd!==""&&this.registrationTimeStart!==""&&this.type!==""){
                 loading=layer.load(2, {

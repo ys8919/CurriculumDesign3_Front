@@ -1,16 +1,24 @@
 import apiUrl from '../Global.js'
 Vue.use(apiUrl);
 var table = layui.table;
+var form=layui.form;
+var element=layui.element;
+var $ = layui.$;
 var vmuserList = new Vue({
     el: '#RegistrationManagement',
     data:{
+        userId:'',
         userName:'',
         query:'',
         jurisdiction:0,
+        selectCompetitionId:'',
+        competitionData:[],
+        data:['1','2','3'],
+        timeState:0,
     },
     created(){
         //自动加载indexs方法
-        this.userList();
+        //this.userList();
     },mounted(){
         //自动加载indexs方法
         //this.VerifyLogin();//登录验证
@@ -20,20 +28,71 @@ var vmuserList = new Vue({
         userList:function () {
             this.jurisdiction= sessionStorage.getItem('jurisdiction')
             this.userName= sessionStorage.getItem('userName')
+            this.userId= sessionStorage.getItem('userId')
             var $ = layui.$;
             var that=this;
+            let loading
             this.$nextTick(function () {
-                window.layui.use(['table','element'], function(){
+                /*
+                    * 查询竞赛信息
+                    * */
+                loading=layer.load(2, {
+                    shade: false,
+                    time: 60*1000
+                });
+                axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/queryCompetitionVague.action',
+                    {
+                        limit:100,
+                        page:1,
+                        chargePersonId:that.userId,
+                    }, {
+                        headers: {
+                            token:sessionStorage.getItem('token') ||'',
+                            //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
+                        },
+                        'Content-Type':'application/json'
+                    })
+                    .then(response => {
+                        layer.close(loading);
+                        //that.BackgroundLogin(response.data);
+                        that.competitionData=response.data.data
+                        form.render();
+                    })
+                    .catch(error => {
+                        form.render();
+                        layer.close(loading);
+                        layer.open({
+                            title: '失败',
+                            content:'服务器请求失败'
+                        });
+                    });
+                window.layui.use(['table','element','form'], function(){
                     //第一个实例
-                    var element = window.layui.element;
+                    //form = window.layui.form;
+                    form.render();
+                    //element = window.layui.element;
                     element.init();
+                    form.on('select(selectCompetition)', function(data){
+                        form.render();
+                        console.log(data.value); //得到被选中的值
+                        that.selectCompetitionId=data.value
+                        table.reload('userListTable',{
+                            where: { //设定异步数据接口的额外参数，任意设
+                                competitionId:that.selectCompetitionId
+                            }
+                            , page: {
+                                curr: 1 //重新从第 1 页开始
+                            }
+                        })
+                    });
+
                     table.render({
                         elem: '#userListTable'
                         ,height: 'full-10   '
                         ,loading:true
                         ,url:apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/queryRegistration.action' //数据接口
                         ,headers: {token:sessionStorage.getItem('token') ||'' }
-                        ,where: {competitionId: sessionStorage.getItem('userId')}
+                        ,where: { competitionId:'0'}
                         ,method:'post'
                         ,page: true //开启分页
                         ,id:'userListTable'
@@ -130,6 +189,10 @@ var vmuserList = new Vue({
                     curr: 1 //重新从第 1 页开始
                 }
             })
+        },
+        onclickSelect:function () {
+            console.log("222")
+            form.render('select');
         }
 
     },
@@ -139,3 +202,7 @@ var vmuserList = new Vue({
 });
 
 
+// $("#selectCompetition").on('click',function () {
+//     console.log("11111")
+//     form.render('select');
+// });

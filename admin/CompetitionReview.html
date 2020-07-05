@@ -27,10 +27,13 @@
 <script  type="module"src="../views/admin/CompetitionReview.js"></script>
 <script type="text/html" id="barDemo">
     {{#  if(d.state === 1){ }}
-    <a class="layui-btn layui-btn-xs" lay-event="noAuthentication">审核</a>
+    <a class="layui-btn layui-btn-xs" lay-event="competitionReviewState">审核</a>
     {{#  } }}
     {{#  if(d.state === 2){ }}
-    <a class="layui-btn layui-btn-xs" lay-event="noAuthentication">撤销审核</a>
+    <a class="layui-btn layui-btn-xs" lay-event="noCompetitionReviewState">撤销审核</a>
+    {{#  } }}
+    {{#  if(d.state === 999){ }}
+    <a class="layui-btn layui-btn-xs disabled layui-disabled" aria-disabled="true" lay-event="">审核不通过</a>
     {{#  } }}
 </script>
 

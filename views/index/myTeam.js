@@ -31,7 +31,7 @@ var vmuserList = new Vue({
                         elem: '#userListTable'
                         ,height: 'full-10   '
                         ,loading:true
-                        ,url:apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/ .action' //数据接口
+                        ,url:apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/queryJoinTeam.action' //数据接口
                         ,headers: {token:sessionStorage.getItem('token') ||'' }
                         ,where: {competitionId: sessionStorage.getItem('userId')}
                         ,method:'post'

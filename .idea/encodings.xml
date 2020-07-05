@@ -10,6 +10,7 @@
     <file url="file://$PROJECT_DIR$/views/index/CompetitionDetails.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/index/CompetitionRelease.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/index/RegistrationManagement.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/index/createTeam.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/index/indexRegisterUpdate.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/index/indexUserAuthentication.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/index/indexUserInfo.js" charset="UTF-8" />

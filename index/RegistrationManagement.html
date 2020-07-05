@@ -35,7 +35,14 @@
         </ul>
         <ul class="layui-nav layui-layout-right"  lay-filter="filter1" v-cloak>
             <li class="layui-nav-item"><a href="myRegistration.html">我的报名</a></li>
-            <li class="layui-nav-item"><a href="myTeam.html">我的团队</a></li>
+            <li class="layui-nav-item">
+                <a href="myTeam.html">团队</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="createTeam.html" >创建团队</a></dd>
+                    <dd><a href="myTeam.html" >我的团队</a></dd>
+
+                </dl>
+            </li>
             <li class="layui-nav-item">
                 <a href="javascript:;" >
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img" >
@@ -63,7 +70,29 @@
     </div>
 
     <div class="content" >
+        <form class="layui-form" style="margin-top: -20px;">
+        <div class="layui-form-item layui-select-1" >
+            <label class="layui-form-label" id="selectCompetition">选择比赛</label>
+            <div class="layui-input-block layui-form"  >
+                <select name="selectCompetition"  lay-verify="" lay-search lay-filter="selectCompetition" @change="onclickSelect">
+                    <option value="" >请选择</option>
+                    <optgroup label="已审核">
+                        <option v-for="value in competitionData":value="value.competitionId" v-if="value.state===2"  >{{value.competitionName}}</option>
+                    </optgroup>
+                    <optgroup label="未审核">
+                        <option v-for="value in competitionData":value="value.competitionId" v-if="value.state===1" >{{value.competitionName}}</option>
+                    </optgroup>
+                    <optgroup label="停止报名">
+                        <option v-for="value in competitionData":value="value.competitionId" v-if="value.state===3"  >{{value.competitionName}}</option>
+                    </optgroup>
+                    <optgroup label="比赛结束">
+                        <option v-for="value in competitionData":value="value.competitionId" v-if="value.state===4"  >{{value.competitionName}}</option>
+                    </optgroup>
+                </select>
+            </div>
+        </div>
 
+        </form>
         <div class="layui-input-block layui-icon layui-search">
             <input type="text" name="" required  lay-verify="required" placeholder="" v-model="query"  autocomplete="off" class="layui-input-search">
             <button type="button" class="layui-btn-search layui-btn layui-btn-sm layui-btn-primary " @click="searchUser">

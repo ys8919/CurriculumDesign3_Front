@@ -89,6 +89,11 @@
     right:50%;
     margin-right: -100px;
 }
+.layui-select-1{
+    position: absolute;
+    margin-top: -70px;
+    margin-left: 50px;
+}
 .layui-input-search{
     border-radius: 5px;
     width: 200px;
