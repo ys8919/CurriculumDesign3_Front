@@ -123,9 +123,14 @@
 <script  type="module" src="../views/index/RegistrationManagement.js"></script>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+
+    <a class="layui-btn layui-btn-xs" lay-event="detail" v-if="competitionType === 1">查看团队</a>
+
+    <a class="layui-btn layui-btn-xs" lay-event="edit" v-if="competitionCheckUser === 1">审核</a>
+
+   <!-- {{#  if(d.type >= 0){ }}
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    {{#  } }}-->
 </script>
 </body>
 </html>

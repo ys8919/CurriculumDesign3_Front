@@ -17,7 +17,9 @@ var vmindex = new Vue({
         competitionType:0,
         competitionState:0,
         userState:0,
-
+        teamList:[],
+        selectTeamId:'',
+        HaveSignedUp:false,
     }, created(){
         //this.indexOnclick();
     },mounted(){
@@ -35,10 +37,7 @@ var vmindex = new Vue({
             var $ = layui.$;
             var that=this;
             let loading
-            loading=layer.load(2, {
-                shade: false,
-                time: 60*1000
-            });
+
             this.$nextTick(function () {
                 var util;
                 var element;
@@ -53,16 +52,40 @@ var vmindex = new Vue({
                     menu.init();
 
                     util = layui.util;
+                    if(that.data.state===2){
+                        var endTime = new Date(that.data.registrationTimeStart).getTime() //假设为结束日期
+                            ,serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
 
+                        util.countdown(endTime, serverTime, function(date, serverTime, timer){
+                            var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
+                            layui.$('#countDown').html('距离报名时间还有：'+ str);
+                        });
+                    }else if(that.data.state===5){
+                        var str=that.data.competitionTime.split('~');
+                        var competitionStartTime=str[0]
+
+                        var endTime = new Date(competitionStartTime).getTime() //假设为结束日期
+                            ,serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+
+                        var endTime1 = new Date(that.data.registrationTimeEnd).getTime() //假设为结束日期
+                            ,serverTime1 = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+
+                        util.countdown(endTime, serverTime, function(date, serverTime, timer){
+                            var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
+                            layui.$('#countDown1').html('距离比赛时间还有：'+ str);
+                        });
+                        util.countdown(endTime1, serverTime1, function(date, serverTime, timer){
+                            var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
+                            layui.$('#countDown').html('距离报名结束时间还有：'+ str);
+                        });
+                    }
                     //示例
-                    var endTime = new Date(that.data.registrationTimeEnd).getTime() //假设为结束日期
-                        ,serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
 
-                    util.countdown(endTime, serverTime, function(date, serverTime, timer){
-                        var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
-                        layui.$('#countDown').html('距离比赛时间还有：'+ str);
-                    });
                 })
+                loading=layer.load(2, {
+                    shade: false,
+                    time: 60*1000
+                });
                 axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/queryCompetition.action',
                     {
                         limit:1,
@@ -83,6 +106,7 @@ var vmindex = new Vue({
                         that.checkUser=response.data.data[0].checkUser
                         that.competitionType=response.data.data[0].type
                         that.competitionState=response.data.data[0].state
+                        console.log( that.data.state)
                     })
                     .catch(error => {
                         layer.close(loading);
@@ -91,8 +115,53 @@ var vmindex = new Vue({
                             content:'服务器请求失败'
                         });
                     });
+                axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/queryIsJoinCompetition.action', //查询是否已经报名
+                    {
 
+                        competitionId:that.competitionId,
+                        userId:that.userId
+                    }, {
+                        headers: {
+                            token:sessionStorage.getItem('token') ||'',
+                            //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
+                        },
+                        'Content-Type':'application/json'
+                    })
+                    .then(response => {
+                        if(!response.data.flag){
+                            that.HaveSignedUp=true;
+                        }
+                        console.log(that.HaveSignedUp)
+                        console.log(response.data.flag)
+                    })
+                /* .catch(error => {
+                     layer.open({
+                         title: '失败',
+                         content:'服务器请求失败'
+                     });
+                 });*/
+                axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/queryJoinTeam.action', //我的团队
+                    {
+                        limit:100,
+                        page:1,
+                        memberId:that.userId
+                    }, {
+                        headers: {
+                            token:sessionStorage.getItem('token') ||'',
+                            //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
+                        },
+                        'Content-Type':'application/json'
+                    })
+                    .then(response => {
+                       that.teamList=response.data.data;
 
+                    })
+                   /* .catch(error => {
+                        layer.open({
+                            title: '失败',
+                            content:'服务器请求失败'
+                        });
+                    });*/
 
 
             });
@@ -115,7 +184,7 @@ var vmindex = new Vue({
 
         },
         CompetitionDetailsOnclick:function () {
-
+            var that=this;
             let loading
             if(this.competitionType===0){
                 loading=layer.load(2, {
@@ -154,6 +223,12 @@ var vmindex = new Vue({
                         });
                     });
             }else if(this.competitionType===1){
+                var teamVal=''
+                that.teamList.forEach(item =>{
+                    teamVal+='<option value="'+item.teamId+'">'+item.teamName+'</option>'
+
+                })
+
                 layer.open({
                     title: '提示',
                     area: ['500px', '300px'],
@@ -162,22 +237,59 @@ var vmindex = new Vue({
                      content: '<div class="layui-form-item layui-form ">' +
                 '<label class="layui-form-label">选择团队</label>' +
                 '<div class="layui-input-block">' +
-                '<select name="range" id="range" lay-filter="selectCompetition">' +
+                '<select name="range" id="range" lay-filter="selectTeam">' +
                 '<option value="">请选择</option>' +
-                '<option value="300">300</option>' +
-                '<option value="500">500</option>' +
-                '<option value="1000">1000</option>' +
-                '<option value="2000">2000</option>' +
+                         teamVal+
+                /*'<option value=""></option>' +*/
                 '</select>' +
                 '</div>' +
-                '</div>'+
-                         '<script> '+
-                         'var form=layui.form; ' +
-                         'form.render(\'select\',\'selectCompetition\');' +
-                         ''+'</script>'
-                    ,
+                '</div>'
+                    ,success: function(index, layero) {
+                        window. layui.config({
+                            base: '../views/index/'
+                        }).use(['form'],function(){
+                            var form=layui.form;
+                            form.render();
+                            form.on('select(selectTeam)', function(data){
+                                console.log(data.value); //得到被选中的值
+                                that.selectTeamId=data.value
+                            });
+                        })
+
+                    },
                     yes: function(index, layero) {
-                        location.reload();
+
+                        axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/registration.action',
+                            {
+                                applicantId:that.selectTeamId,
+                                competitionId:that.competitionId,
+                                checkUser:that.checkUser,
+                            }, {
+                                headers: {
+                                    token:sessionStorage.getItem('token') ||'',
+                                    //jurisdiction:sessionStorage.getItem('jurisdiction') ||''
+                                },
+                                'Content-Type':'application/json'  //如果写成contentType会报错
+                            })
+                            .then(response => {
+                                layer.close(loading);
+                                layer.open({
+                                    title: '团队报名',
+                                    content: response.data.msg,
+                                    yes: function(index, layero) {
+                                        location.reload();
+                                        layer.close(index);
+                                    },
+                                });
+                                console.log(response.data);
+                            })
+                            .catch(error => {
+                                layer.close(loading);
+                                layer.open({
+                                    title: '失败',
+                                    content:'服务器请求失败'
+                                });
+                            });
                         layer.close(index);
                     },
                     btn2: function(index, layero) {

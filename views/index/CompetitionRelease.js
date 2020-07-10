@@ -63,6 +63,7 @@ var vmuserList = new Vue({
                         ,type: 'datetime'
                         ,format: 'yyyy-MM-dd HH:mm:ss' //可任意组合
                         ,range: `~` //或 range: '~' 来自定义分割字符
+                        ,min: new Date().getTime()
                         ,trigger: 'click'
                         ,done: function(value, date, endDate){
                             that.competitionTime=value
@@ -75,6 +76,7 @@ var vmuserList = new Vue({
                         ,format: 'yyyy-MM-dd HH:mm:ss' //可任意组合
                         ,range: `~` //或 range: '~' 来自定义分割字符
                         ,trigger: 'click'
+                        ,min: new Date().getTime()
                         ,done: function(value, date, endDate){
                             var str=value.split('~');
                              that.registrationTimeEnd=str[1];

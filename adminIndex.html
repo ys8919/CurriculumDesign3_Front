@@ -10,7 +10,7 @@
     <script src="layui/layui.all.js"></script>
 
 </head>
-<body class="layui-layout-body">
+<body class="layui-layout-body" >
 <div class="layui-layout layui-layout-admin" id="adminIndex">
     <div class="layui-header">
         <div class="layui-logo">竞赛报名后台管理</div>
@@ -32,11 +32,11 @@
         </ul>
     </div>
 
-    <div class="layui-side layui-bg-black">
+    <div class="layui-side layui-bg-black" v-cloak>
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree"  lay-filter="filter">
-                <li class="layui-nav-item layui-nav-itemed">
+            <ul class="layui-nav layui-nav-tree"  lay-filter="filter" >
+                <li class="layui-nav-item layui-nav-itemed" v-if="userJurisdiction==3">
                     <a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="admin/userList.html" onclick="return false;">用户列表</a></dd>
@@ -44,23 +44,31 @@
                         <dd><a href="admin/PublisherManagement.html" onclick="return false;">发布者管理</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
+                <li class="layui-nav-item" v-if="userJurisdiction==3">
                     <a href="javascript:;">竞赛管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="admin/CompetitionList.html" onclick="return false;">竞赛列表</a></dd>
                         <dd><a href="admin/CompetitionReview.html" onclick="return false;">竞赛审核</a></dd>
                     </dl>
                 </li>
-
+                <li class="layui-nav-item layui-nav-itemed" v-if="userJurisdiction==3||userJurisdiction==4">
+                    <a href="javascript:;">报名管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="admin/AdminRegistrationManagement.html" onclick="return false;">报名信息</a></dd>
+                    </dl>
+                </li>
             </ul>
         </div>
     </div>
 
-    <div class="layui-body">
+    <div class="layui-body" v-if="userJurisdiction==3" v-cloak>
         <!-- 内容主体区域 -->
         <iframe  frameborder="0" id="iframeMain" src="admin/userList.html" style="width: 100%;height: 99%;"></iframe>
     </div>
-
+    <div class="layui-body" v-if="userJurisdiction==4" v-cloak>
+        <!-- 内容主体区域 -->
+        <iframe  frameborder="0" id="iframeMain" src="admin/AdminRegistrationManagement.html" style="width: 100%;height: 99%;"></iframe>
+    </div>
     <div class="layui-footer">
         <!-- 底部固定区域 -->
         © yx8991

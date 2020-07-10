@@ -101,9 +101,20 @@
 <script  type="module" src="../views/index/myTeam.js"></script>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+
+    {{#  if(d.type === 0){ }}
+    <a class="layui-btn layui-btn-xs" lay-event="invitation">邀请成员</a>
+    {{#  } }}
+    {{#  if(d.type >= 0){ }}
+    <a class="layui-btn layui-btn-xs" lay-event="see">查看成员</a>
+    {{#  } }}
+    {{#  if(d.type === 1 && d.state===1){ }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="JoinTeam">加入队伍</a>
+    {{#  } }}
+
+    <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">解散团队</a>-->
 </script>
+
+
 </body>
 </html>

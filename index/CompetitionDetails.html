@@ -62,9 +62,11 @@
         <div class="cont w1000">
             <div class="title">
                 <h4>当前比赛
-                    <button class="layui-btn layui-btn-danger new-icon" style="width: 70px" v-if="data.state===2">报名中</button>
-                    <button class="layui-btn layui-btn-danger new-icon" style="width: 70px" v-if="data.state===3">比赛中</button>
-                    <button class="layui-btn layui-btn-danger new-icon" style="width: 100px" v-if="data.state===4">比赛结束</button>
+
+                    <button class="layui-btn layui-btn-danger new-icon" style="width: 110px" v-if="data.state===2">报名未开始</button>
+                    <button class="layui-btn layui-btn-danger new-icon" style="width: 70px" v-if="data.state===5">报名中</button>
+                    <button class="layui-btn layui-btn-danger new-icon" style="width: 90px" v-if="data.state===3">停止报名</button>
+                    <button class="layui-btn layui-btn-danger new-icon" style="width: 90px" v-if="data.state===4">比赛结束</button>
                 </h4>
                 <h3>{{ data.competitionName }}</h3>
                 <h4>{{ data.competitionTime }}</h4>
@@ -78,8 +80,11 @@
             <form class="layui-form" @submit.prevent="CompetitionDetailsOnclick">
                 <div class="layui-form-item layui-form-item-infoList">
                     <div class="layui-input-block">
-                        <button class="layui-btn layui-anim layui-anim-scale layui-btn-user"  lay-submit lay-filter="formDemo" v-if="data.state===2">报名</button>
-                        <button class="layui-btn layui-anim layui-anim-scale layui-btn-user layui-btn-disabled" disabled lay-submit lay-filter="formDemo" v-if="data.state===4">比赛结束</button>
+                        <button class="layui-btn layui-anim layui-anim-scale layui-btn-user"  lay-submit lay-filter="formDemo" v-if="data.state===5&&!HaveSignedUp">报名</button>
+                        <button class="layui-btn layui-anim layui-anim-scale layui-btn-user layui-btn-disabled" disabled lay-submit lay-filter="" v-if="data.state===5 &&HaveSignedUp">已报名</button>
+                        <button class="layui-btn layui-anim layui-anim-scale layui-btn-user layui-btn-disabled" disabled lay-submit lay-filter="" v-if="data.state===4">比赛结束</button>
+                        <button class="layui-btn layui-anim layui-anim-scale layui-btn-user layui-btn-disabled" disabled lay-submit lay-filter="" v-if="data.state===2">报名未开始</button>
+                        <button class="layui-btn layui-anim layui-anim-scale layui-btn-user layui-btn-disabled" disabled lay-submit lay-filter="" v-if="data.state===3">停止报名</button>
                     </div>
                 </div>
 
@@ -89,6 +94,9 @@
 
                 <div class="layui-form-item  layui-form-item-comInfo-item">
                     <div id="countDown"></div>
+                </div>
+                <div class="layui-form-item  layui-form-item-comInfo-item">
+                    <div id="countDown1"></div>
                 </div>
                 <div class="layui-form-item layui-form-item-comInfo-item">
                     <h1 class="layui-text ">比赛类型</h1>

@@ -11,7 +11,7 @@
 
 </head>
 <body class="layui-layout-body">
-<div id="CompetitionReview">
+<div id="AdminRegistrationManagementInterface">
     <div class="layui-input-block layui-icon layui-search">
         <input type="text" name="" required  lay-verify="required" placeholder="" v-model="query"  autocomplete="off" class="layui-input-search">
         <button type="button" class="layui-btn-search layui-btn layui-btn-sm layui-btn-primary " @click="searchUser">
@@ -19,22 +19,14 @@
         </button>
     </div>
     <div style="margin-top: 100px" >
-        <table class="layui-hide" id="CompetitionReviewTable" lay-filter="CompetitionReviewTableTest"></table>
+        <table class="layui-hide" id="AdminRegistrationManagement" lay-filter="AdminRegistrationManagement"></table>
 
     </div>
 </div>
 
-<script  type="module"src="../views/admin/CompetitionReview.js"></script>
+<script  type="module" src="../views/admin/AdminRegistrationManagement.js"></script>
 <script type="text/html" id="barDemo">
-    {{#  if(d.state === 1){ }}
-    <a class="layui-btn layui-btn-xs" lay-event="competitionReviewState">审核</a>
-    {{#  } }}
-    {{#  if(d.state >= 2&&d.state<999){ }}
-    <a class="layui-btn layui-btn-xs" lay-event="noCompetitionReviewState">撤销审核</a>
-    {{#  } }}
-    {{#  if(d.state === 999){ }}
-    <a class="layui-btn layui-btn-xs disabled layui-disabled" aria-disabled="true" lay-event="">审核不通过</a>
-    {{#  } }}
+    <a class="layui-btn layui-btn-xs" lay-event="competitionReviewState">报名信息</a>
 </script>
 
 </body>

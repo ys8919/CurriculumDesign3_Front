@@ -62,8 +62,14 @@ function CompetitionStatusInfo (res) {
         case 3:
             info='停止报名'
             break;
-        case 999:
+        case 4:
             info='比赛结束'
+            break;
+        case 5:
+            info='开始报名'
+            break;
+        case 999:
+            info='审核未通过'
             break;
     }
     return info
@@ -145,6 +151,9 @@ function registrationStateInfo (res) {
             break;
         case 2:
             info='报名成功'
+            break;
+        default:
+            info='暂无'
             break;
     }
     return info

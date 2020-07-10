@@ -10,7 +10,7 @@ var vmindex = new Vue({
         limit:5,
         query:'',
         jurisdiction:1,
-
+        registrationBegins:false,
     }, created(){
         //this.indexOnclick();
     },mounted(){
@@ -23,12 +23,14 @@ var vmindex = new Vue({
             this.jurisdiction= sessionStorage.getItem('jurisdiction')
             var $ = layui.$;
             var that=this;
+            var util;
             let loading
             loading=layer.load(2, {
                 shade: false,
                 time: 60*1000
             });
             this.$nextTick(function () {
+
                 axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/fuzzyQueryByState.action',
                     {
                         limit:that.limit,
@@ -54,14 +56,24 @@ var vmindex = new Vue({
                         });
                     });
 
+
                 window. layui.config({
                     base: 'views/index/'
-                }).use(['element','laypage','jquery','menu'],function(){
+                }).use(['element','laypage','jquery','menu','util'],function(){
                    var element = layui.element,
                         laypage = layui.laypage,
                         $ = layui.$,
                         menu = layui.menu;
-                    console.log('count:'+that.count)
+                   /* util = layui.util;
+                    //console.log('count:'+that.count)
+                    var endTime = new Date(that.data.registrationTimeStart).getTime() //假设为结束日期
+                        ,serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+
+                    util.countdown(endTime, serverTime, function(date, serverTime, timer){
+                        that.registrationBegins = date <= 0;
+                        /!* var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
+                         layui.$('#countDown').html('距离比赛时间还有：'+ str);*!/
+                    });*/
                     laypage.render({
                         elem: 'demo'
                         ,count: that.count //数据总数，从服务端得到

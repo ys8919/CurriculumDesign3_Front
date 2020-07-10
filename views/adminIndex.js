@@ -4,6 +4,7 @@ var vmAdminIndex = new Vue({
     el: '#adminIndex',
     data:{
         userName:'',
+        userJurisdiction:'',
         query:'',
     },
     created(){
@@ -15,6 +16,7 @@ var vmAdminIndex = new Vue({
     methods: {
         userNameList:function () {
             this.userName= sessionStorage.getItem('userName')
+            this.userJurisdiction= sessionStorage.getItem('jurisdiction')
             var $ = layui.$;
             var that=this;
             this.$nextTick(function () {

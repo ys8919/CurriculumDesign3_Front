@@ -51,15 +51,6 @@ var vmuserList = new Vue({
                         ,count: 70 //数据总数，从服务端得到
                     });
                     menu.init();
-                    /* element.on('nav(filter1)', function(elem){
-                         if(elem.attr("href")!=="javascript:;"){
-                             that.VerifyLogin();//登录验证
-                             top.location.href='/CurriculumDesign3_Front/login.html';
-                             //$("#iframeMain").attr("src",elem.attr("href"));
-                             console.log(elem)
-                         }
-
-                     });*/
                 })
 
             });
@@ -122,11 +113,13 @@ var vmuserList = new Vue({
                             'Content-Type':'application/json'  //如果写成contentType会报错
                         })
                         .then(response => {
-                            console.log(response.data);
+                            //console.log(response.data);
                             layer.close(loading);
+                            that.BackgroundLogin(response.data);
                             if(response.data.count>0){
                                 that.Invited+="  "+response.data.data[0].userName;
                                 that.InvitedId.push(response.data.data[0].userId)
+                                //that.InvitedId.push({member:response.data.data[0].userId})
                                 console.log("Invited"+that.Invited)
                                 console.log("InvitedId"+that.InvitedId)
                             }else{
@@ -157,6 +150,7 @@ var vmuserList = new Vue({
         },
         createTeamClick:function(){
             let loading
+            var that=this;
             if(this.teamName!==""){
                 loading=layer.load(2, {
                     shade: false,
@@ -176,6 +170,7 @@ var vmuserList = new Vue({
                         'Content-Type':'application/json'  //如果写成contentType会报错
                     })
                     .then(response => {
+                        that.BackgroundLogin(response.data);
                         layer.close(loading);
                         if(response.data.flag){
                             var teamId=response.data.teamId
@@ -193,20 +188,34 @@ var vmuserList = new Vue({
                                 })
                                 .then(response => {
                                     layer.close(loading);
-                                    layer.open({
-                                        title: '提示',
-                                        content: '队伍id：'+teamId+'\n'+response.data.msg,
-                                        yes: function(index, layero) {
-                                            //  location.reload();
-                                            layer.close(index);
-                                        },
-                                    });
+                                    if(response.data.flag){
+                                        layer.open({
+                                            title: '提示',
+                                            content: '队伍id：'+teamId+'\n'+response.data.msg,
+                                            yes: function(index, layero) {
+                                                //  location.reload();
+                                                window.location.href='myTeam.html';
+                                                layer.close(index);
+                                            },
+                                        });
+                                    }else{
+                                        layer.open({
+                                            title: '创建队伍成功，邀请成员失败',
+                                            content: response.data.msg+'\n 点击确定前往队伍管理邀请',
+                                            yes: function(index, layero) {
+                                                //  location.reload();
+                                                window.location.href='myTeam.html';
+                                                layer.close(index);
+                                            },
+                                        });
+                                    }
+
                                 })
                                 .catch(error => {
                                     layer.close(loading);
                                     layer.open({
                                         title: '失败',
-                                        content:'服务器请求失败'
+                                        content:'服务器请求添加成员失败'
                                     });
                                 });
                         }else{

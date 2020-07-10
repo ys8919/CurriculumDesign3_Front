@@ -31,9 +31,9 @@ var vmuserList = new Vue({
                         elem: '#userListTable'
                         ,height: 'full-10   '
                         ,loading:true
-                        ,url:apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/ .action' //数据接口
+                        ,url:apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/queryMyJoinCompetition.action' //数据接口
                         ,headers: {token:sessionStorage.getItem('token') ||'' }
-                        ,where: {competitionId: sessionStorage.getItem('userId')}
+                        ,where: {userId: sessionStorage.getItem('userId')}
                         ,method:'post'
                         ,page: true //开启分页
                         ,id:'userListTable'
@@ -42,16 +42,21 @@ var vmuserList = new Vue({
                         ,contentType: 'application/json'
                         ,cols: [[ //表头
                             {type: 'checkbox', fixed: 'left',align:'center'}
-                            ,{field: 'registrationId', title: 'ID', width:150, sort: true,align:'center'}
-                            ,{field: 'competitionName', title: '竞赛标题', width:150,align:'center'}
-                            ,{field: 'applicantName', title: '队名', width:80,align:'center'}
-                            ,{field: 'registrationTime', title: '生成时间', width: 150,align:'center',sort: true}
-                            ,{field: 'state', title: '状态', width: 120,align:'center', sort: true,
+                            //,{field: 'registrationId', title: 'ID', width:150, sort: true,align:'center'}
+                            ,{field: 'competitionName', title: '竞赛名', width:200,align:'center'}
+                            ,{field: 'competitionTime', title: '比赛时间', width: 200,align:'center',sort: true}
+                            ,{field: 'type', title: '比赛类型', width: 200,align:'center', sort: true,
+                                templet: function(d){
+                                    //将数字转成字符模式显示
+                                    return  that.CompetitionTypeInfo(d.type)
+                                }}
+                            ,{field: 'state', title: '状态', width: 200,align:'center', sort: true,
                                 templet: function(d){
                                     //将数字转成字符模式显示
                                     return  that.registrationStateInfo(d.state)
                                 }}
-                            ,{field: 'auditeason', title: '报名审核结果', width: 80, sort: true,align:'center'}
+
+                            //,{field: 'auditeason', title: '报名审核结果', width: 80, sort: true,align:'center'}
                             ,{fixed: 'right', width: 170, align:'center', toolbar: '#barDemo'}
                         ]],
                         done: function(res, curr, count){
@@ -67,14 +72,18 @@ var vmuserList = new Vue({
                         if(layEvent === 'detail'){ //查看
                             //do somehing
                             layer.msg('暂未开放');
-                        } else if(layEvent === 'del'){ //删除
-                            layer.msg('暂未开放');
-                            /* layer.confirm('真的删除行么', function(index){
-                                 //obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                                // layer.close(index);
-                                 //向服务端发送删除指令
 
-                             });*/
+                        } else if(layEvent === 'del'){ //退出比赛
+                            layer.msg('暂未开放');
+                            /*if(data.type===0){
+                                layer.confirm('确定退出？', function(index){
+                                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                    layer.close(index);
+                                    //向服务端发送删除指令
+
+                                });
+                            }*/
+
                         } else if(layEvent === 'edit'){ //编辑
                             //do something
                             layer.msg('暂未开放');

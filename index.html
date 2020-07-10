@@ -86,8 +86,9 @@
                         <div class="layui-col-xs12 layui-col-sm8 layui-col-md7">
                             <div class="item-cont">
                                     <h3>{{value.competitionName}}
-                                        <button class="layui-btn layui-btn-danger new-icon" style="width: 50px" v-if="value.state===2">报名中</button>
-                                        <button class="layui-btn layui-btn-danger new-icon" style="width: 50px" v-if="value.state===3">比赛中</button>
+                                     <button class="layui-btn layui-btn-danger new-icon" style="width: 100px" v-if="value.state===2">报名未开始</button>
+                                        <button class="layui-btn layui-btn-danger new-icon" style="width: 50px" v-if="value.state===5">报名中</button>
+                                        <button class="layui-btn layui-btn-danger new-icon" style="width: 70px" v-if="value.state===3">停止报名</button>
                                         <button class="layui-btn layui-btn-danger new-icon" style="width: 70px" v-if="value.state===4">比赛结束</button>
                                     </h3>
                                 <h5 v-if="value.type===0">个人赛</h5>
