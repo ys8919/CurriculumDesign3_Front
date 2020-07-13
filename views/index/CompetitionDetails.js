@@ -41,47 +41,7 @@ var vmindex = new Vue({
             this.$nextTick(function () {
                 var util;
                 var element;
-                window. layui.config({
-                    base: '../views/index/'
-                }).use(['element','laypage','jquery','menu','util'],function(){
-                    var element = layui.element,
-                        laypage = layui.laypage,
-                        $ = layui.$,
-                        menu = layui.menu;
-                    element.init();
-                    menu.init();
 
-                    util = layui.util;
-                    if(that.data.state===2){
-                        var endTime = new Date(that.data.registrationTimeStart).getTime() //假设为结束日期
-                            ,serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
-
-                        util.countdown(endTime, serverTime, function(date, serverTime, timer){
-                            var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
-                            layui.$('#countDown').html('距离报名时间还有：'+ str);
-                        });
-                    }else if(that.data.state===5){
-                        var str=that.data.competitionTime.split('~');
-                        var competitionStartTime=str[0]
-
-                        var endTime = new Date(competitionStartTime).getTime() //假设为结束日期
-                            ,serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
-
-                        var endTime1 = new Date(that.data.registrationTimeEnd).getTime() //假设为结束日期
-                            ,serverTime1 = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
-
-                        util.countdown(endTime, serverTime, function(date, serverTime, timer){
-                            var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
-                            layui.$('#countDown1').html('距离比赛时间还有：'+ str);
-                        });
-                        util.countdown(endTime1, serverTime1, function(date, serverTime, timer){
-                            var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
-                            layui.$('#countDown').html('距离报名结束时间还有：'+ str);
-                        });
-                    }
-                    //示例
-
-                })
                 loading=layer.load(2, {
                     shade: false,
                     time: 60*1000
@@ -140,10 +100,8 @@ var vmindex = new Vue({
                          content:'服务器请求失败'
                      });
                  });*/
-                axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/queryJoinTeam.action', //我的团队
+                axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/queryIsTeamLearder.action', //我的团队
                     {
-                        limit:100,
-                        page:1,
                         memberId:that.userId
                     }, {
                         headers: {
@@ -163,7 +121,49 @@ var vmindex = new Vue({
                         });
                     });*/
 
+                window. layui.config({
+                    base: '../views/index/'
+                }).use(['element','laypage','jquery','menu','util'],function(){
+                    var element = layui.element,
+                        laypage = layui.laypage,
+                        $ = layui.$,
+                        menu = layui.menu;
+                    element.init();
+                    menu.init();
+                    util = layui.util;
+                    if(that.data.state===2){
+                        console.log('serverTime')
+                        var endTime = new Date(that.data.registrationTimeStart).getTime() //假设为结束日期
+                            ,serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
 
+                        util.countdown(endTime, serverTime, function(date, serverTime, timer){
+                            var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
+                            //console.log('serverTime:'+str)
+                            layui.$('#countDown').html('距离报名时间还有：'+ str);
+                        });
+                    }else if(that.data.state===5){
+                        var str=that.data.competitionTime.split('~');
+                        var competitionStartTime=str[0]
+                        console.log('serverTime')
+                        var endTime = new Date(competitionStartTime).getTime() //假设为结束日期
+                            ,serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+
+                        var endTime1 = new Date(that.data.registrationTimeEnd).getTime() //假设为结束日期
+                            ,serverTime1 = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+
+                        util.countdown(endTime, serverTime, function(date, serverTime, timer){
+                            var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
+                            //console.log('serverTime:'+str)
+                            layui.$('#countDown1').html('距离比赛时间还有：'+ str);
+                        });
+                        util.countdown(endTime1, serverTime1, function(date, serverTime, timer){
+                            var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
+                            layui.$('#countDown').html('距离报名结束时间还有：'+ str);
+                        });
+                    }
+                    //示例
+
+                })
             });
 
 

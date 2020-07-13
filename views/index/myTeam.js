@@ -128,6 +128,7 @@ var vmuserList = new Vue({
 
                              });*/
                         } else if(layEvent === 'see'){ //查看成员
+                            var teamId=data.teamId
                             var that=that
                             layer.open({
                                 type: 0,
@@ -199,8 +200,9 @@ var vmuserList = new Vue({
 
                                             axios.post(apiUrl.apiUrl+'/CurriculumDesign3_Back/Controller/exitTeam.action',
                                                 {
-
-                                                    id:data.id,
+                                                    teamId:teamId,
+                                                    mamberId:data.userId,
+                                                    //id:data.id,
                                                 }, {
                                                     headers: {
                                                         token:sessionStorage.getItem('token') ||'',

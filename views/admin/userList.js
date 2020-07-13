@@ -41,11 +41,11 @@ var vmuserList = new Vue({
                             ,{field: 'userName', title: '用户名', width:120,align:'center'}
                             ,{field: 'email', title: '邮箱', width:150,align:'center'}
                             ,{field: 'tel', title: '手机', width:150,align:'center'}
-                            ,{field: 'schoolName', title: '学校', width: 100,align:'center'}
+                            ,{field: 'schoolName', title: '学校', width: 200,align:'center'}
                             ,{field: 'stuNumber', title: '学号', width: 100,sort: true,align:'center'}
                             ,{field: 'realName', title: '真名', width: 100,align:'center', }
-                            ,{field: 'education', title: '学历', width: 80,align:'center'}
-                            ,{field: 'jurisdiction', title: '权限', width: 120,align:'center', sort: true,
+                            ,{field: 'education', title: '学历', width: 100,align:'center'}
+                            ,{field: 'jurisdiction', title: '权限', width: 200,align:'center', sort: true,
                                 templet: function(d){
                                     //将数字转成字符模式显示
                                     return  that.jurisdictionInfo(d.jurisdiction)

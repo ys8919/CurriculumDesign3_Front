@@ -127,7 +127,7 @@ var vmuserList = new Vue({
                                     if(that.competitionCheckUser===0){
                                         return  '审核通过'
                                     }else {
-                                        return d.auditeason
+                                        return d.auditeason ||''
                                     }
                             }}
                             ,{fixed: 'right', width: 170, align:'center', toolbar: '#barDemo'}

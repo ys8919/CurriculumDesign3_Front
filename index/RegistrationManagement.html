@@ -76,6 +76,9 @@
             <div class="layui-input-block layui-form"  >
                 <select name="selectCompetition"  lay-verify="" lay-search lay-filter="selectCompetition" @change="onclickSelect">
                     <option value="" >请选择</option>
+                    <optgroup label="开始报名">
+                        <option v-for="value in competitionData":value="value.competitionId" v-if="value.state===5"  >{{value.competitionName}}</option>
+                    </optgroup>
                     <optgroup label="已审核">
                         <option v-for="value in competitionData":value="value.competitionId" v-if="value.state===2"  >{{value.competitionName}}</option>
                     </optgroup>
@@ -88,6 +91,7 @@
                     <optgroup label="比赛结束">
                         <option v-for="value in competitionData":value="value.competitionId" v-if="value.state===4"  >{{value.competitionName}}</option>
                     </optgroup>
+
                 </select>
             </div>
         </div>

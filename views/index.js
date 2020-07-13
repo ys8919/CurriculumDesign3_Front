@@ -76,7 +76,7 @@ var vmindex = new Vue({
                     });*/
                     laypage.render({
                         elem: 'demo'
-                        ,count: that.count //数据总数，从服务端得到
+                        ,count: that.count || 10//数据总数，从服务端得到
                         ,limit:that.limit
                         ,jump: function(obj, first){
                             //obj包含了当前分页的所有参数，比如：
